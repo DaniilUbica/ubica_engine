@@ -2,6 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Animation.h"
+
 class Animation;
 class HealthBar;
 

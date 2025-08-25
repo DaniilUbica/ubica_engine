@@ -1,4 +1,4 @@
-#include "Engine/GameObject.h"
+#include "GameObject.h"
 
 std::shared_ptr<sf::Sprite> GameObject::getSprite() const {
     return m_sprite;

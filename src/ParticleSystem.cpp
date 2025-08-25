@@ -1,6 +1,6 @@
-#include "Engine/ParticleSystem.h"
-#include "Engine/Constants.h"
-#include "Engine/Helpers.hpp"
+#include "ParticleSystem.h"
+#include "Constants.h"
+#include "Helpers.hpp"
 
 ParticleSystem* ParticleSystem::m_instance = nullptr;
 

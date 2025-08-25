@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10)
-project(UbicaEngine LANGUAGES CXX)
+set(UNIT_NAME UbicaEngine)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -10,25 +10,39 @@ FetchContent_Declare(SFML
     GIT_TAG 3.0.x)
 FetchContent_MakeAvailable(SFML)
 
-file(GLOB_RECURSE ENGINE_SOURCES 
-    "src/*.cpp"
-    "src/*.hpp"
+set(ENGINE_SOURCES
+    src/Animation.cpp 
+    src/Character.cpp 
+    src/GameObject.cpp 
+    src/HealthBar.cpp 
+    src/ParticleSystem.cpp
+    src/Pickable.cpp 
+    src/Timer.cpp 
+    src/World.cpp
+    
+    include/Animation.h 
+    include/Character.h 
+    include/Constants.h 
+    include/GameObject.h 
+    include/Helpers.hpp 
+    include/ParticleSystem.h 
+    include/Pickable.h 
+    include/Timer.h 
+    include/UI/HealthBar.h
+    include/World.h
 )
 
-add_library(${CMAKE_PROJECT_NAME} STATIC ${ENGINE_SOURCES})
+add_library(${UNIT_NAME} STATIC ${ENGINE_SOURCES})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} 
-    PUBLIC SFML::Graphics SFML::Window SFML::System SFML::Audio
-)
+target_link_libraries(${UNIT_NAME} PRIVATE sfml-graphics)
+target_link_libraries(${UNIT_NAME} PRIVATE sfml-audio)
+target_link_libraries(${UNIT_NAME} PRIVATE sfml-window)
+target_link_libraries(${UNIT_NAME} PRIVATE sfml-system)
+target_compile_features(${UNIT_NAME} PRIVATE cxx_std_17)
+target_include_directories(${UNIT_NAME} PRIVATE include)
 
-target_include_directories(${CMAKE_PROJECT_NAME}
-    PUBLIC 
-        $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>
-        $<INSTALL_INTERFACE:include>
-)
-
-install(TARGETS ${CMAKE_PROJECT_NAME}
-    EXPORT ${CMAKE_PROJECT_NAME}Targets
+install(TARGETS ${UNIT_NAME}
+    EXPORT ${UNIT_NAME}Targets
     LIBRARY DESTINATION lib
     ARCHIVE DESTINATION lib
     RUNTIME DESTINATION bin
