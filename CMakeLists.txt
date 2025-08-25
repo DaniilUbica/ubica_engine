@@ -4,7 +4,11 @@ project(UbicaEngine LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(SFML 3.0 COMPONENTS graphics window system audio REQUIRED)
+include(FetchContent)
+FetchContent_Declare(SFML
+    GIT_REPOSITORY https://github.com/SFML/SFML.git
+    GIT_TAG 3.0.x)
+FetchContent_MakeAvailable(SFML)
 
 file(GLOB_RECURSE ENGINE_SOURCES 
     "src/*.cpp"
