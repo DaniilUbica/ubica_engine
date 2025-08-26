@@ -17,6 +17,7 @@ class GameObject {
 protected:
     sf::Vector2f                m_size;
     sf::Vector2f                m_pos;
+    sf::Texture                 m_texture;
     std::shared_ptr<sf::Sprite> m_sprite;
 
     GameObject() = default;
