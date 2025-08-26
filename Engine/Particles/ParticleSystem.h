@@ -4,6 +4,14 @@
 
 namespace game_engine {
 
+/**
+ * @class Particle
+ * @brief Represents a single particle in a particle system.
+ *
+ * The Particle class manages the visual representation, movement, and lifetime
+ * of an individual particle. Each particle has a circular shape, velocity, and
+ * a lifetime that decreases over time.
+ */
 class Particle {
 private:
     sf::CircleShape m_shape;
@@ -11,14 +19,34 @@ private:
     float           m_lifetime;
     
 public:
+
+    /**
+     * @brief Constructs a Particle at the specified position with the given color.
+     * @param pos The initial position of the particle
+     * @param color The color of the particle
+     */
     Particle(sf::Vector2f pos, sf::Color& color);
-    
+
+    /**
+     * @brief Updates the particle's state based on elapsed time.
+     * @param time Elapsed time since the last update
+     *
+     * Moves the particle according to its velocity and decreases its lifetime.
+     */
     void Update(float time);
     
     sf::CircleShape getShape() { return m_shape; };
     float getLifetime() { return m_lifetime; };
 };
 
+/**
+ * @class ParticleSystem
+ * @brief Singleton class that manages all particles in the game.
+ *
+ * The ParticleSystem is responsible for creating, updating, and rendering
+ * particles. It implements the singleton pattern to ensure only one instance
+ * exists throughout the game.
+ */
 class ParticleSystem {
 private:
     static ParticleSystem* m_instance;
@@ -32,8 +60,26 @@ public:
     ~ParticleSystem();
     
     static ParticleSystem* instance();
+
+    /**
+     * @brief Updates all particles in the system.
+     * @param time Elapsed time since the last update
+     *
+     * Updates each particle's state and removes particles that have expired.
+     */
     void Update(float time);
+
+    /**
+     * @brief Creates a bursting bubble particle effect at the specified position.
+     * @param pos The position where the bubble burst effect should occur
+     * @param texture The texture to take color for the bubble particles
+     */
     void burstingBubble(sf::Vector2f pos, const sf::Texture& texture);
+
+    /**
+     * @brief Renders all particles to the specified window.
+     * @param window The render window to draw particles on
+     */
     void drawParticles(sf::RenderWindow& window);
 };
 

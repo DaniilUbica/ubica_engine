@@ -11,7 +11,7 @@ void Character::addHP(float health) {
     m_health += health;
 }
 
-void Character::setPosition(sf::Vector2f& pos) {
+void Character::setPosition(const sf::Vector2f& pos) {
     m_pos = pos;
 }
 
