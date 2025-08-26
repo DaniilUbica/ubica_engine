@@ -2,6 +2,8 @@
 #include "Constants.h"
 #include "Helpers.hpp"
 
+#include <cmath>
+
 using namespace game_engine;
 
 ParticleSystem* ParticleSystem::m_instance = nullptr;
