@@ -4,6 +4,14 @@
 
 namespace game_engine {
 
+/**
+ * @class World
+ * @brief Singleton class that manages the game world's visual elements.
+ *
+ * The World class is responsible for loading, storing, and providing access to
+ * the game world's background and border elements. It implements the singleton
+ * pattern to ensure only one world instance exists throughout the game.
+ */
 class World {
 private:
     static World*              m_world;
@@ -21,6 +29,14 @@ public:
 
     static World* getWorld();
 
+    /**
+     * @brief Initializes the world with background and border textures.
+     * @param background Texture to use for the world background
+     * @param border Texture to use for the world borders
+     *
+     * This method must be called to set up the world before using any other functionality.
+     * It loads the textures and creates the corresponding sprites.
+     */
     void initWorld(const sf::Texture& background, const sf::Texture& border);
 
     std::vector<sf::Sprite> getBorderSprites() const;
