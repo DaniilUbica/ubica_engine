@@ -1,6 +1,8 @@
 #include "World.h"
 #include "Constants.h"
 
+using namespace game_engine;
+
 World* World::m_world = nullptr;
 
 World::~World() {

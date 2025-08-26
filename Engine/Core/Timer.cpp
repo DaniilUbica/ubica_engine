@@ -1,5 +1,7 @@
 #include "Timer.h"
 
+using namespace game_engine;
+
 Timer::Timer(float time) {
 	m_time = time;
 }

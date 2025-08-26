@@ -1,5 +1,7 @@
 #include "GameObject.h"
 
+using namespace game_engine;
+
 std::shared_ptr<sf::Sprite> GameObject::getSprite() const {
     return m_sprite;
 }

@@ -2,6 +2,8 @@
 #include "Constants.h"
 #include "Helpers.hpp"
 
+using namespace game_engine;
+
 ParticleSystem* ParticleSystem::m_instance = nullptr;
 
 Particle::Particle(sf::Vector2f pos, sf::Color& color) {

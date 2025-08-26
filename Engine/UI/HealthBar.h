@@ -2,6 +2,9 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace game_engine {
+namespace ui {
+
 class HealthBar {
 private:
     sf::RectangleShape m_border;
@@ -18,9 +21,11 @@ private:
 
 public:
     HealthBar(sf::Vector2f size, sf::Vector2f pos, float health, sf::Color border_color,
-        sf::Color background_color, sf::Color health_color, bool is_static = true, sf::Vector2f parent_size = { -1, -1 });
+              sf::Color background_color, sf::Color health_color, bool is_static = true, sf::Vector2f parent_size = { -1, -1 });
 
     void Update(float health, sf::Vector2f pos);
     void Draw(sf::RenderWindow& window);
 };
 
+}
+}

@@ -1,5 +1,7 @@
 #include "Pickable.h"
 
+using namespace game_engine;
+
 void Pickable::commonPicked() {
 	m_picked = true;
 }

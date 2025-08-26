@@ -2,6 +2,8 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace game_engine {
+
 class World {
 private:
     static World*              m_world;
@@ -25,3 +27,5 @@ public:
     std::shared_ptr<sf::Sprite> getBackgroundSprite() const;
     size_t getBorderVecSize() const;
 };
+
+}

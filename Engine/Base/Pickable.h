@@ -2,14 +2,18 @@
 
 #include "GameObject.h"
 
+namespace game_engine {
+
 class Pickable : public GameObject {
 protected:
-	bool m_picked = false;
+    bool m_picked = false;
 
-	void commonPicked();
+    void commonPicked();
 
 public:
     virtual void onPicked() = 0;
 
-	bool getPicked();
+    bool getPicked();
 };
+
+}

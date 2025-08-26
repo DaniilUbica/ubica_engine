@@ -1,5 +1,7 @@
 #include "Animation.h"
 
+using namespace game_engine;
+
 Animation::Animation(const sf::Texture& texture, int x, int y, int width, int height, int frames_count, float animation_speed, int step) {
     m_animation_speed = animation_speed;
     m_sprite = std::make_shared<sf::Sprite>(texture);

@@ -1,4 +1,7 @@
-#include "UI/HealthBar.h"
+#include "HealthBar.h"
+
+using namespace game_engine;
+using namespace ui;
 
 HealthBar::HealthBar(sf::Vector2f size, sf::Vector2f pos, float health, sf::Color border_color,
     sf::Color background_color, sf::Color health_color, bool is_static, sf::Vector2f parent_size) {

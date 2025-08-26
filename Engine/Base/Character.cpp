@@ -1,5 +1,8 @@
 #include "Character.h"
 
+using namespace game_engine;
+using namespace ui;
+
 void Character::takeDamage(float damage) {
     m_health -= damage;
 }
