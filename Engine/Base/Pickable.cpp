@@ -6,6 +6,6 @@ void Pickable::commonPicked() {
 	m_picked = true;
 }
 
-bool Pickable::getPicked() {
+bool Pickable::getPicked() const {
 	return m_picked;
 }
