@@ -29,7 +29,7 @@ enum class Direction : bool {
  * common to all characters in the game. This is an abstract base class
  * that must be derived to create specific character types.
  */
-class Character {
+class Character : public std::enable_shared_from_this<Character> {
 protected:
     float		                   m_health;
     float		                   m_speed;
