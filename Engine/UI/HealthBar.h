@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Base/Drawable.h"
 
 namespace game_engine {
 namespace ui {
@@ -13,7 +13,7 @@ namespace ui {
  * a border, background, and filled health portion. It can be used as either a static UI element
  * or dynamically positioned relative to a parent object (like a character).
  */
-class HealthBar {
+class HealthBar : public game_engine::Drawable, public sf::Drawable {
 private:
     sf::RectangleShape m_border;
     sf::RectangleShape m_background;
@@ -26,6 +26,9 @@ private:
     float              m_border_size = 2.0;
     float              m_parent_offset = 7.0;
     bool               m_is_static;
+
+protected:
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 public:
 
@@ -52,12 +55,6 @@ public:
      * both the health value and position are updated relative to the parent object.
      */
     void Update(float health, sf::Vector2f pos);
-
-    /**
-     * @brief Renders the health bar to the specified window.
-     * @param window The render window to draw the health bar on
-     */
-    void Draw(sf::RenderWindow& window);
 };
 
 }

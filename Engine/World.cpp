@@ -5,6 +5,14 @@ using namespace game_engine;
 
 World* World::m_world = nullptr;
 
+void World::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    for (const auto sprite : m_border_sprites) {
+        target.draw(sprite, states);
+    }
+
+    target.draw(*m_background_sprite, states);
+}
+
 World::~World() {
     m_world = nullptr;
 }
@@ -54,8 +62,4 @@ std::vector<sf::Sprite> World::getBorderSprites() const {
 
 std::shared_ptr<sf::Sprite> World::getBackgroundSprite() const {
     return m_background_sprite;
-}
-
-size_t World::getBorderVecSize() const {
-    return m_border_sprites.size();
 }

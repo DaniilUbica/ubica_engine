@@ -3,8 +3,14 @@
 using namespace game_engine;
 using namespace ui;
 
+void HealthBar::draw(sf::RenderTarget& target, sf::RenderStates states) const {
+    target.draw(m_border, states);
+    target.draw(m_background, states);
+    target.draw(m_health_bar, states);
+}
+
 HealthBar::HealthBar(sf::Vector2f size, sf::Vector2f pos, float health, sf::Color border_color,
-    sf::Color background_color, sf::Color health_color, bool is_static, sf::Vector2f parent_size) {
+    sf::Color background_color, sf::Color health_color, bool is_static, sf::Vector2f parent_size) : game_engine::Drawable(this) {
 
     m_size = size;
     m_pos = sf::Vector2f(pos.x + m_parent_size.x / 2 - m_size.x / 2, pos.y - m_size.y - m_parent_offset);
@@ -54,10 +60,4 @@ void HealthBar::Update(float health, sf::Vector2f pos) {
     }
 
     m_health_bar.setSize(new_size);
-}
-
-void HealthBar::Draw(sf::RenderWindow& window) {
-    window.draw(m_border);
-    window.draw(m_background);
-    window.draw(m_health_bar);
 }

@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Base/Drawable.h"
 
 namespace game_engine {
 
@@ -12,7 +12,7 @@ namespace game_engine {
  * the game world's background and border elements. It implements the singleton
  * pattern to ensure only one world instance exists throughout the game.
  */
-class World {
+class World : public game_engine::Drawable, public sf::Drawable {
 private:
     static World*              m_world;
 
@@ -21,7 +21,9 @@ private:
     std::shared_ptr<sf::Sprite> m_background_sprite;
     std::vector<sf::Sprite>     m_border_sprites;
 
-    World() = default;
+    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+    World() : game_engine::Drawable(this) {};
 public:
     World(World const& world) = delete;
     void operator=(World const&) = delete;
@@ -41,7 +43,6 @@ public:
 
     std::vector<sf::Sprite> getBorderSprites() const;
     std::shared_ptr<sf::Sprite> getBackgroundSprite() const;
-    size_t getBorderVecSize() const;
 };
 
 }
