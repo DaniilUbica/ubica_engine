@@ -28,6 +28,8 @@ Drawable::~Drawable() {
 
 void Drawable::drawAllDrawableObjects(sf::RenderWindow& window) {
     for (const auto drawable : s_drawables) {
-        window.draw(*drawable->getSprite());
+        if (drawable->m_have_sprite) {
+            window.draw(*drawable->getSprite());
+        }
     }
 }
