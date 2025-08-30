@@ -3,6 +3,8 @@
 using namespace game_engine;
 using namespace ui;
 
+Character::Character(const sf::Texture& texture) : Drawable(texture) {}
+
 void Character::takeDamage(float damage) {
     m_health -= damage;
 }
@@ -29,10 +31,6 @@ sf::Vector2f Character::getSize() const {
 
 sf::Vector2f Character::getPosition() const {
     return m_pos;
-}
-
-std::shared_ptr<sf::Sprite> Character::getSprite() const {
-    return m_sprite;
 }
 
 Direction Character::getDirection() const {

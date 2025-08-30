@@ -6,8 +6,9 @@ add_subdirectory(SFML)
 set(ENGINE_SOURCES
     Engine/Animation/Animation.cpp 
     Engine/Base/Character.cpp
-    Engine/Base/GameObject.cpp 
-    Engine/UI/HealthBar.cpp 
+    Engine/Base/GameObject.cpp
+    Engine/Base/Drawable.cpp
+    Engine/UI/HealthBar.cpp
     Engine/Particles/ParticleSystem.cpp
     Engine/Base/Pickable.cpp 
     Engine/Core/Timer.cpp 
@@ -15,8 +16,9 @@ set(ENGINE_SOURCES
     
     Engine/Animation/Animation.h
     Engine/Base/Character.h 
-    Engine/Base/GameObject.h 
-    Engine/UI/HealthBar.h 
+    Engine/Base/GameObject.h
+    Engine/Base/Drawable.h
+    Engine/UI/HealthBar.h
     Engine/Particles/ParticleSystem.h
     Engine/Base/Pickable.h 
     Engine/Core/Timer.h 

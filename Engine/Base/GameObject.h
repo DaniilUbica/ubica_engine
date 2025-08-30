@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Drawable.h"
 
 namespace game_engine {
 
@@ -13,18 +13,16 @@ namespace game_engine {
  * size, and visual representation through a sprite. This is an abstract
  * base class designed to be inherited by specific game object types.
  */
-class GameObject {
+class GameObject : public Drawable {
 protected:
     sf::Vector2f                m_size;
     sf::Vector2f                m_pos;
-    sf::Texture                 m_texture;
-    std::shared_ptr<sf::Sprite> m_sprite;
 
+    GameObject(const sf::Texture& texture);
     GameObject() = default;
     virtual ~GameObject() = default;
 
 public:
-    std::shared_ptr<sf::Sprite> getSprite() const;
     sf::Vector2f getPosition() const;
     sf::Vector2f getSize() const;
 };

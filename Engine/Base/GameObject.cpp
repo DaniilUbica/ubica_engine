@@ -2,9 +2,7 @@
 
 using namespace game_engine;
 
-std::shared_ptr<sf::Sprite> GameObject::getSprite() const {
-    return m_sprite;
-}
+GameObject::GameObject(const sf::Texture& texture) : Drawable(texture) {}
 
 sf::Vector2f GameObject::getPosition() const {
     return m_pos;

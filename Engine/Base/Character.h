@@ -1,7 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
-
+#include "Drawable.h"
 #include "Animation/Animation.h"
 
 namespace game_engine {
@@ -29,18 +28,18 @@ enum class Direction : bool {
  * common to all characters in the game. This is an abstract base class
  * that must be derived to create specific character types.
  */
-class Character : public std::enable_shared_from_this<Character> {
+class Character : public std::enable_shared_from_this<Character>, public Drawable {
 protected:
     float		                   m_health;
     float		                   m_speed;
     sf::Vector2f                   m_size;
     sf::Vector2f                   m_pos;
-    std::shared_ptr<sf::Sprite>    m_sprite;
     std::unique_ptr<Animation>     m_run_animation;
     std::shared_ptr<ui::HealthBar> m_health_bar;
     Direction                      m_direction = Direction::RIGHT;
 
 public:
+    Character(const sf::Texture& texture);
     virtual ~Character() = default;
 
     /**
@@ -76,7 +75,6 @@ public:
     float getHP() const;
     sf::Vector2f getSize() const;
     sf::Vector2f getPosition() const;
-    std::shared_ptr<sf::Sprite> getSprite() const;
     Direction getDirection() const;
     std::shared_ptr<ui::HealthBar> getHealthBar() const;
 };
