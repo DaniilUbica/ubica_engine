@@ -3,9 +3,9 @@
 namespace game_engine {
 namespace primitives {
 
-class ISprite {
+class IVector2 {
 public:
-    virtual ~ISprite() {};
+    virtual ~IVector2() {};
 };
 
 }

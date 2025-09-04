@@ -9,6 +9,7 @@ class ISprite;
 
 class Sprite {
 public:
+    Sprite();
 
 private:
     std::unique_ptr<ISprite> m_impl;

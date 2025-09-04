@@ -5,8 +5,12 @@ add_subdirectory(SFML)
 
 set(SOURCES
     Sprite/SFMLSprite.cpp
+    Vector2/SFMLVector2.cpp
+    Rect/SFMLRect.cpp
 
     Sprite/SFMLSprite.h
+    Vector2/SFMLVector2.h
+    Rect/SFMLRect.h
 )
 
 add_library(${UNIT_NAME} STATIC ${SOURCES})
@@ -18,7 +22,7 @@ target_link_libraries(${UNIT_NAME} PUBLIC
     sfml-audio
 )
 
-target_include_directories(${UNIT_NAME} PUBLIC SFML)
+target_include_directories(${UNIT_NAME} PUBLIC SFML PRIVATE ${CMAKE_SOURCE_DIR}/ubica_engine/Primitives)
 
 install(TARGETS ${UNIT_NAME}
     EXPORT ${UNIT_NAME}Targets
