@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 set(UNIT_NAME UbicaEngine)
 
-add_subdirectory(SFML)
-
 set(ENGINE_SOURCES
     Engine/Animation/Animation.cpp 
     Engine/Base/Character.cpp
@@ -29,14 +27,8 @@ set(ENGINE_SOURCES
 
 add_library(${UNIT_NAME} STATIC ${ENGINE_SOURCES})
 
-target_link_libraries(${UNIT_NAME} PUBLIC
-    sfml-system
-    sfml-window
-    sfml-graphics
-    sfml-audio
-)
-
-target_include_directories(${UNIT_NAME} PUBLIC Engine PUBLIC SFML/include)
+target_link_libraries(${UNIT_NAME} PUBLIC Primitives)
+target_include_directories(${UNIT_NAME} PUBLIC Engine)
 
 install(TARGETS ${UNIT_NAME}
     EXPORT ${UNIT_NAME}Targets
