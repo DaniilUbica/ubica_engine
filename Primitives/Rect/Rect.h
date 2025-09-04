@@ -12,9 +12,7 @@ public:
         m_impl = createRect(x, y, width, height);
     };
 
-    bool findIntersection(const Rect<T>& rect) const { return m_impl->findIntersection(*(rect.impl().get())); };
-
-    std::shared_ptr<IRect<T>> impl() const { return m_impl; };
+    bool findIntersection(const Rect<T>& rect) const { return m_impl->findIntersection(*(rect.m_impl.get())); };
 
 private:
     std::shared_ptr<IRect<T>> m_impl;
