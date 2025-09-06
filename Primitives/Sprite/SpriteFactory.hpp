@@ -11,9 +11,11 @@
 namespace game_engine {
 namespace primitives {
 
-static std::unique_ptr<ISprite> createSprite() {
+class Texture;
+
+static std::unique_ptr<ISprite> createSprite(std::shared_ptr<ITexture> texture) {
 #ifdef USE_SFML
-    return std::make_unique<SFMLSprite>();
+    return std::make_unique<SFMLSprite>(texture);
 #endif
     return nullptr;
 }

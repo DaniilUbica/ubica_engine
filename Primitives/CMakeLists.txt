@@ -18,6 +18,10 @@ set(PRIMITIVES_SOURCES
     Sprite/Sprite.hpp
     Sprite/SpriteFactory.hpp
     Sprite/ISprite.h
+
+    Texture/Texture.hpp 
+    Texture/TextureFactory.hpp
+    Texture/ITexture.h 
 )
 
 add_library(${UNIT_NAME} STATIC ${PRIMITIVES_SOURCES})

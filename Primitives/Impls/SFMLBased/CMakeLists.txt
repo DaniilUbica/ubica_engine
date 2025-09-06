@@ -6,6 +6,7 @@ add_subdirectory(SFML)
 set(SOURCES
     SFMLSprite.hpp
     SFMLRect.hpp
+    SFMLTexture.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${SOURCES})

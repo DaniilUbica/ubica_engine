@@ -2,13 +2,14 @@
 
 #include "SpriteFactory.hpp"
 #include "Sprite/ISprite.h"
+#include "Texture/Texture.hpp"
 
 namespace game_engine {
 namespace primitives {
 
 class Sprite {
 public:
-    Sprite() { m_impl = createSprite(); };
+    Sprite(const Texture& texture) { m_impl = createSprite(texture.m_impl); };
 
     void setPosition(const Vector2f& pos) { m_impl->setPosition(pos); };
     void setScale(const Vector2f& scale) { m_impl->setScale(scale); };
