@@ -1,10 +1,12 @@
 #pragma once
 
-#ifdef USE_SFML
-    #include "Impls/SFMLBased/Rect/SFMLRect.h"
-#endif
+#include "Config.h"
 
 #include <memory>
+
+#ifdef USE_SFML
+    #include "Impls/SFMLBased/SFMLRect.hpp"
+#endif
 
 namespace game_engine {
 namespace primitives {

@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Interface/Vector2Factory.h"
-
 #include <type_traits>
 
 namespace game_engine {
@@ -12,6 +10,8 @@ struct Vector2 {
     T x;
     T y;
 };
+
+using Vector2f = Vector2<float>;
 
 }
 }

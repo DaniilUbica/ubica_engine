@@ -4,13 +4,8 @@ set(UNIT_NAME SFMLBased)
 add_subdirectory(SFML)
 
 set(SOURCES
-    Sprite/SFMLSprite.cpp
-    Vector2/SFMLVector2.cpp
-    Rect/SFMLRect.cpp
-
-    Sprite/SFMLSprite.h
-    Vector2/SFMLVector2.h
-    Rect/SFMLRect.h
+    SFMLSprite.hpp
+    SFMLRect.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${SOURCES})

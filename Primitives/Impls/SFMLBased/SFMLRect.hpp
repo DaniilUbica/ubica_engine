@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rect/Interface/IRect.h"
+#include "Rect/IRect.h"
 
 #include <SFML/Graphics.hpp>
 
@@ -14,10 +14,13 @@ public:
         m_sfRect = { { x, y }, { width, height } };
     }
 
-    bool findIntersection(const IRect<T>& rect) const override {
+    bool intersects(const IRect<T>& rect) const override {
         const auto sfRectImpl = dynamic_cast<const SFMLRect<T>&>(rect);
         return m_sfRect.findIntersection(sfRectImpl.m_sfRect) != std::nullopt;
     }
+
+    Vector2<T> getPosition() const override { return { m_sfRect.position.x, m_sfRect.position.y }; };
+    Vector2<T> getSize() const override { return { m_sfRect.size.x, m_sfRect.size.y }; };
 
 private:
     sf::Rect<T> m_sfRect;
