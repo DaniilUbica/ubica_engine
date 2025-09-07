@@ -11,9 +11,9 @@
 namespace game_engine {
 namespace primitives {
 
-static std::unique_ptr<ITexture> createTexture() {
+static std::shared_ptr<ITexture> createTexture() {
 #ifdef USE_SFML
-    return std::make_unique<SFMLTexture>();
+    return std::make_shared<SFMLTexture>();
 #endif
     return nullptr;
 }

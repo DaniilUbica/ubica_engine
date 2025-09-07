@@ -20,5 +20,8 @@ private:
     std::shared_ptr<IRect<T>> m_impl;
 };
 
+using FloatRect = Rect<float>;
+using IntRect = Rect<int>;
+
 }
 }

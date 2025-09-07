@@ -13,9 +13,9 @@ namespace primitives {
 
 class Texture;
 
-static std::unique_ptr<ISprite> createSprite(std::shared_ptr<ITexture> texture) {
+static std::shared_ptr<ISprite> createSprite(std::shared_ptr<ITexture> texture) {
 #ifdef USE_SFML
-    return std::make_unique<SFMLSprite>(texture);
+    return std::make_shared<SFMLSprite>(texture);
 #endif
     return nullptr;
 }

@@ -4,9 +4,13 @@ set(UNIT_NAME SFMLBased)
 add_subdirectory(SFML)
 
 set(SOURCES
+    sfmlbased.cpp
+    
     SFMLSprite.hpp
     SFMLRect.hpp
     SFMLTexture.hpp
+    SFMLRenderWindow.hpp
+    Helpers.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${SOURCES})

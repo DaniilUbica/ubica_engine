@@ -8,8 +8,12 @@ if(USE_SFML)
 endif()
 
 set(PRIMITIVES_SOURCES
+    primitives.cpp
+
     Config.h
     Vector2.hpp
+    Drawable.h
+    IDrawable.h
 
     Rect/Rect.hpp
     Rect/RectFactory.hpp
@@ -22,6 +26,10 @@ set(PRIMITIVES_SOURCES
     Texture/Texture.hpp 
     Texture/TextureFactory.hpp
     Texture/ITexture.h 
+
+    RenderWindow/RenderWindow.hpp 
+    RenderWindow/RenderWindowFactory.hpp
+    RenderWindow/IRenderWindow.h 
 )
 
 add_library(${UNIT_NAME} STATIC ${PRIMITIVES_SOURCES})
