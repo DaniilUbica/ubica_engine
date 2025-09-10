@@ -11,7 +11,7 @@ namespace primitives {
 
 class SFMLSprite : public ISprite, public sf::Sprite {
 public:
-    SFMLSprite(std::shared_ptr<ITexture> texture) : sf::Sprite(std::static_pointer_cast<SFMLTexture>(texture)->m_sfTexture)
+    SFMLSprite(std::shared_ptr<ITexture> texture) : sf::Sprite(*std::dynamic_pointer_cast<sf::Texture>(texture))
     { };
 
     void setPosition(const Vector2f& pos) override {sf::Sprite::setPosition({ pos.x, pos.y }); };
