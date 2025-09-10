@@ -15,7 +15,7 @@ public:
     void close() override { m_sfRenderWindow.close(); };
     void display() override { m_sfRenderWindow.pollEvent(); m_sfRenderWindow.display(); };
     void draw(std::shared_ptr<IDrawable> drawable) override {
-        if (const auto sfDrawable = std::any_cast<std::shared_ptr<sf::Drawable>>(drawable->getConcreteGraphicLibImpl())) {
+        if (const auto sfDrawable = std::dynamic_pointer_cast<sf::Drawable>(drawable)) {
             m_sfRenderWindow.draw(*sfDrawable);
         }
     };
