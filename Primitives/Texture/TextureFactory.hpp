@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Config.h"
+#include "ITexture.h"
 
 #include <memory>
 

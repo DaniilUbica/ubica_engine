@@ -10,6 +10,8 @@ set(SOURCES
     SFMLTexture.hpp
     SFMLImage.hpp
     SFMLRenderWindow.hpp
+    SFMLRectangleShape.hpp
+    SFMLCircleShape.hpp
     Helpers.hpp
 )
 

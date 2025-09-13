@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Config.h"
+#include "ISprite.h"
+#include "Primitives/Texture/ITexture.h"
 
 #include <memory>
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 set(UNIT_NAME Primitives)
 
-option(USE_SFML "Use SFML as engine's graphic lib" ON)
+option(USE_SFML "Use SFML as engine's graphic lib" OFF)
 
 if(USE_SFML)
     add_subdirectory(Impls/SFMLBased)
@@ -29,6 +29,14 @@ set(PRIMITIVES_SOURCES
     Image/Image.hpp
     Image/IImage.h
     Image/ImageFactory.hpp
+
+    RectangleShape/RectangleShape.hpp
+    RectangleShape/IRectangleShape.h
+    RectangleShape/RectangleShapeFactory.hpp
+
+    CircleShape/CircleShape.hpp
+    CircleShape/ICircleShape.h
+    CircleShape/CircleShapeFactory.hpp
 
     RenderWindow/RenderWindow.hpp 
     RenderWindow/RenderWindowFactory.hpp

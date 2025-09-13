@@ -1,5 +1,7 @@
 #pragma once
 
+#include <string>
+
 namespace game_engine {
 namespace primitives {
 
