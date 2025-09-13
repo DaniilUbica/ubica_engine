@@ -14,7 +14,7 @@ public:
     SFMLTexture() : sf::Texture() {};
     SFMLTexture(const std::string& path) : sf::Texture(path), m_texturePath(path) {};
 
-    bool loadFromFile(const std::string& path) override { return sf::Texture::loadFromFile(path); };
+    bool loadFromFile(const std::string& path) override { m_texturePath = path; return sf::Texture::loadFromFile(path); };
 
     // TODO: create image from pixels array
     Image copyToImage() const override {
