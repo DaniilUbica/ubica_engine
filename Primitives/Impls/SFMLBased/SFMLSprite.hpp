@@ -16,7 +16,7 @@ public:
 
     void setPosition(const Vector2f& pos) override {sf::Sprite::setPosition({ pos.x, pos.y }); };
     void setScale(const Vector2f& scale) override { sf::Sprite::setScale({ scale.x, scale.y }); };
-    void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a) override { sf::Sprite::setColor({ r, g, b, a }); };
+    void setColor(const Color& color) override { sf::Sprite::setColor(engineColorToSfColor(color)); };
     void setRotation(int degrees) override { sf::Sprite::setRotation(sf::degrees(degrees)); };
     void setOrigin(const Vector2f& origin) override { sf::Sprite::setOrigin({ origin.x, origin.y }); };
     void setTextureRect(const IntRect& rectangle) override { sf::Sprite::setTextureRect(engineRectToSfRect(rectangle)); };

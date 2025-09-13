@@ -5,10 +5,10 @@ add_subdirectory(SFML)
 
 set(SOURCES
     sfmlbased.cpp
-    
+
     SFMLSprite.hpp
-    SFMLRect.hpp
     SFMLTexture.hpp
+    SFMLImage.hpp
     SFMLRenderWindow.hpp
     Helpers.hpp
 )

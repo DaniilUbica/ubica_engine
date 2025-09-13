@@ -14,7 +14,7 @@ public:
 
     void setPosition(const Vector2f& pos) { m_impl->setPosition(pos); };
     void setScale(const Vector2f& scale) { m_impl->setScale(scale); };
-    void setColor(uint8_t r, uint8_t g, uint8_t b, uint8_t a = 255) { m_impl->setColor(r, g, b, a); }
+    void setColor(const Color& color) { m_impl->setColor(color); }
     void setRotation(int degrees) { m_impl->setRotation(degrees); };
     void setOrigin(const Vector2f& origin) { m_impl->setOrigin(origin); };
     void setTextureRect(const IntRect& rectangle) { m_impl->setTextureRect(rectangle); };

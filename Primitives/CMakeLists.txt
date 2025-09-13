@@ -12,21 +12,23 @@ set(PRIMITIVES_SOURCES
 
     Config.h
     Vector2.hpp
+    Rect.hpp
     Drawable.h
     IDrawable.h
     Event.hpp
-
-    Rect/Rect.hpp
-    Rect/RectFactory.hpp
-    Rect/IRect.h
+    Color.h
     
     Sprite/Sprite.hpp
     Sprite/SpriteFactory.hpp
     Sprite/ISprite.h
 
-    Texture/Texture.hpp 
+    Texture/Texture.hpp
     Texture/TextureFactory.hpp
-    Texture/ITexture.h 
+    Texture/ITexture.h
+
+    Image/Image.hpp
+    Image/IImage.h
+    Image/ImageFactory.hpp
 
     RenderWindow/RenderWindow.hpp 
     RenderWindow/RenderWindowFactory.hpp

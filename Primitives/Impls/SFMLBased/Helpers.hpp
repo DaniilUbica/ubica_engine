@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rect/Rect.hpp"
+#include "Rect.hpp"
 #include "Event.hpp"
 
 #include <SFML/Graphics.hpp>
@@ -88,6 +88,14 @@ static std::unique_ptr<Event> sfEventToEngineEvent(const std::optional<sf::Event
     }
 
     return nullptr;
+}
+
+static sf::Color engineColorToSfColor(const Color& color) {
+    return { color.r, color.g, color.b, color.a };
+}
+
+static Color sfColorToEngineColor(const sf::Color& color) {
+    return { color.r, color.g, color.b, color.a };
 }
 
 }
