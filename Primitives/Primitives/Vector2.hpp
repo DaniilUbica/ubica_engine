@@ -10,6 +10,18 @@ struct Vector2 {
     T x;
     T y;
 
+    Vector2() {};
+    Vector2(T x, T y) : x(x), y(y) {};
+
+    Vector2& operator=(const Vector2& other) {
+        if (this != &other) {
+            x = other.x;
+            y = other.y;
+        }
+
+        return *this;
+    }
+
     Vector2 operator+(const Vector2& other) const {
         return {x + other.x, y + other.y};
     }
@@ -70,6 +82,22 @@ Vector2<T> operator-(const Vector2<T>& vec, T scalar) {
 }
 
 template<typename T>
+Vector2<T>& operator+=(Vector2<T>& vec, T scalar) {
+    vec.x += scalar;
+    vec.y += scalar;
+
+    return vec;
+}
+
+template<typename T>
+Vector2<T>& operator-=(Vector2<T>& vec, T scalar) {
+    vec.x -= scalar;
+    vec.y -= scalar;
+
+    return vec;
+}
+
+template<typename T>
 Vector2<T> operator*(const Vector2<T>& vec, T scalar) {
     return {vec.x * scalar, vec.y * scalar};
 }
@@ -77,6 +105,22 @@ Vector2<T> operator*(const Vector2<T>& vec, T scalar) {
 template<typename T>
 Vector2<T> operator/(const Vector2<T>& vec, T scalar) {
     return {vec.x / scalar, vec.y / scalar};
+}
+
+template<typename T>
+Vector2<T>& operator*=(Vector2<T>& vec, T scalar) {
+    vec.x *= scalar;
+    vec.y *= scalar;
+
+    return vec;
+}
+
+template<typename T>
+Vector2<T>& operator/=(Vector2<T>& vec, T scalar) {
+    vec.x /= scalar;
+    vec.y /= scalar;
+
+    return vec;
 }
 
 }

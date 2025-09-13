@@ -41,6 +41,10 @@ set(PRIMITIVES_SOURCES
     Primitives/RenderWindow/RenderWindow.hpp 
     Primitives/RenderWindow/RenderWindowFactory.hpp
     Primitives/RenderWindow/IRenderWindow.h 
+
+    Primitives/View/View.hpp 
+    Primitives/View/ViewFactory.hpp
+    Primitives/View/IView.h 
 )
 
 add_library(${UNIT_NAME} STATIC ${PRIMITIVES_SOURCES})

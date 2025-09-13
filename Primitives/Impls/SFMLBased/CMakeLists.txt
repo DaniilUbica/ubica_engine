@@ -12,6 +12,7 @@ set(SOURCES
     SFMLRenderWindow.hpp
     SFMLRectangleShape.hpp
     SFMLCircleShape.hpp
+    SFMLView.hpp
     Helpers.hpp
 )
 

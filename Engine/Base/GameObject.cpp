@@ -2,7 +2,7 @@
 
 using namespace game_engine;
 
-GameObject::GameObject(const primitives::Texture& texture) {}
+GameObject::GameObject(const primitives::Texture& texture) : Drawable(texture) {}
 
 primitives::Vector2f GameObject::getPosition() const {
     return m_pos;

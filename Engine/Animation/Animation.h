@@ -48,7 +48,7 @@ public:
      *
      * @param time Elapsed time since last update
      * @param rotate Whether to use the rotated version of the frames
-     * @return std::shared_ptr<sf::Sprite> Shared pointer to the sprite with updated animation frame
+     * @return std::shared_ptr<game_engine::primitives::Sprite> Shared pointer to the sprite with updated animation frame
      */
     std::shared_ptr<primitives::Sprite> Tick(float time, bool rotate);
 };

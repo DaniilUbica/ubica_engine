@@ -2,6 +2,7 @@
 
 #include "Rect.hpp"
 #include "Event.hpp"
+#include "Color.h"
 
 #include <SFML/Graphics.hpp>
 
