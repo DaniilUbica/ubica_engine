@@ -1,7 +1,5 @@
 #pragma once
 
-#include <any>
-
 #include "IDrawable.h"
 
 namespace game_engine {

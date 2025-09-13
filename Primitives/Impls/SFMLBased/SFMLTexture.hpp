@@ -7,17 +7,13 @@
 namespace game_engine {
 namespace primitives {
 
-class SFMLTexture : public ITexture {
-    friend class SFMLSprite;
+class SFMLTexture : public ITexture, public sf::Texture {
     
 public:
-    SFMLTexture() : m_sfTexture() {};
-    SFMLTexture(const std::string& path) : m_sfTexture(path) {};
+    SFMLTexture() : sf::Texture() {};
+    SFMLTexture(const std::string& path) : sf::Texture(path) {};
     
-    bool loadFromFile(const std::string& path) override { return m_sfTexture.loadFromFile(path); };
-    
-private:
-    sf::Texture m_sfTexture;
+    bool loadFromFile(const std::string& path) override { return sf::Texture::loadFromFile(path); };
 };
 
 }
