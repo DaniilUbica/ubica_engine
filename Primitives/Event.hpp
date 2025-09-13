@@ -14,7 +14,7 @@ public:
         Close
     };
 
-    Event(Type type = Type::Unknown) { m_type = type; };
+    Event(Type type = Type::Unknown) : m_type(type) {};
     virtual ~Event() = default;
 
     Type type() const { return m_type; }
@@ -48,11 +48,7 @@ public:
         Move
     };
 
-    MouseEvent(const Vector2i& pos, Button button, Action action) : Event(Type::Mouse) {
-        m_pos = pos;
-        m_button = button;
-        m_action = action;
-    }
+    MouseEvent(const Vector2i& pos, Button button, Action action) : Event(Type::Mouse), m_pos(pos), m_button(button), m_action(action) {}
 
     Vector2i position() const { return m_pos; };
     Button button() const { return m_button; };
@@ -185,11 +181,7 @@ public:
     };
 
 
-    KeyEvent(Key key, Action action, uint8_t modifiers = NoModifier) : Event(Type::Keyboard) {
-        m_key = key;
-        m_action = action;
-        m_modifiers = modifiers;
-    }
+    KeyEvent(Key key, Action action, uint8_t modifiers = NoModifier) : Event(Type::Keyboard), m_key(key), m_action(action), m_modifiers(modifiers) {}
 
     bool hasModifier(Modifier modifier) const { return (m_modifiers & modifier) != 0; }
     void setModifier(Modifier modifier, bool enabled = true) {

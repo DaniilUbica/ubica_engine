@@ -10,7 +10,7 @@ namespace primitives {
 
 class Sprite : public Drawable {
 public:
-    Sprite(const Texture& texture) { m_impl = createSprite(texture.m_impl); };
+    Sprite(const Texture& texture) : m_impl(createSprite(texture.m_impl)) {};
 
     void setPosition(const Vector2f& pos) { m_impl->setPosition(pos); };
     void setScale(const Vector2f& scale) { m_impl->setScale(scale); };

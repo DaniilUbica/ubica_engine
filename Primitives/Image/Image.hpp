@@ -7,7 +7,7 @@ namespace primitives {
 
 class Image {
 public:
-    Image() { m_impl = createImage(); };
+    Image() : m_impl(createImage()) {};
     Image(const std::string& path) { m_impl = createImage(); m_impl->loadFromFile(path); };
 
     [[nodiscard]] bool loadFromFile(const std::string& path) { return m_impl->loadFromFile(path); };
