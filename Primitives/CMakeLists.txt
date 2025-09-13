@@ -14,6 +14,7 @@ set(PRIMITIVES_SOURCES
     Vector2.hpp
     Drawable.h
     IDrawable.h
+    Event.hpp
 
     Rect/Rect.hpp
     Rect/RectFactory.hpp
