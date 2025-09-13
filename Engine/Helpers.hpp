@@ -1,14 +1,15 @@
 #pragma once
 
-#include "SFML/Graphics.hpp"
+#include "Primitives/Texture/Texture.hpp"
+
 namespace game_engine {
 
-sf::Color calculateAverageTextureColor(const sf::Texture& texture) {
-    sf::Vector2u size = texture.getSize();
+primitives::Color calculateAverageTextureColor(const primitives::Texture& texture) {
+    primitives::Vector2u size = texture.getSize();
     unsigned int width = size.x;
     unsigned int height = size.y;
 
-    sf::Image image = texture.copyToImage();
+    primitives::Image image = texture.copyToImage();
 
     float redSum = 0;
     float greenSum = 0;
@@ -19,7 +20,7 @@ sf::Color calculateAverageTextureColor(const sf::Texture& texture) {
 
     for (unsigned int x = 0; x < width; ++x) {
         for (unsigned int y = 0; y < height; ++y) {
-            sf::Color color = image.getPixel({ x, y });
+            primitives::Color color = image.getPixelColor({ x, y });
             if (color.a == 0) {
                 pixelCount--;
                 continue;
@@ -37,7 +38,7 @@ sf::Color calculateAverageTextureColor(const sf::Texture& texture) {
     float avgBlue = blueSum / pixelCount;
     float avgAlpha = alphaSum / pixelCount;
 
-    return sf::Color(avgRed, avgGreen, avgBlue, avgAlpha);
+    return primitives::Color(avgRed, avgGreen, avgBlue, avgAlpha);
 }
 
 }

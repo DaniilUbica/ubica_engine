@@ -3,6 +3,8 @@
 #include "Color.h"
 #include "Vector2.hpp"
 
+#include<string>
+
 namespace game_engine {
 namespace primitives {
 

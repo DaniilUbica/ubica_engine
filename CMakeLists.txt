@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.10)
 set(UNIT_NAME UbicaEngine)
 
+add_subdirectory(Primitives)
+
 set(ENGINE_SOURCES
     Engine/Animation/Animation.cpp 
     Engine/Base/Character.cpp

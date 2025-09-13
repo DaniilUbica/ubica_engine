@@ -1,21 +1,25 @@
 #pragma once
 
+#include "IDrawable.h"
+#include "Vector2.hpp"
+#include "Color.h"
+
 namespace game_engine {
 namespace primitives {
 
-class IRectangleShape : public IDrawable {
+class ICircleShape : public IDrawable {
 public:
-    virtual ~IRectangleShape() {};
+    virtual ~ICircleShape() {};
 
     virtual void move(const Vector2f& pos) = 0;
 
     virtual void setPosition(const Vector2f& pos) = 0;
-    virtual void setSize(const Vector2f& size) = 0;
+    virtual void setRadius(float radius) = 0;
     virtual void setFillColor(const Color& color) = 0;
 
     virtual Color getFillColor() const = 0;
     virtual Vector2f getPosition() const = 0;
-    virtual Vector2f getSize() const = 0;
+    virtual float getRadius() const = 0;
 };
 
 }

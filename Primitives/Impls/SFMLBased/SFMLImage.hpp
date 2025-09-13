@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Image/IImage.h"
+#include "Helpers.hpp"
 
 #include <SFML/Graphics.hpp>
 

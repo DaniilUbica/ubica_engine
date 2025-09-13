@@ -1,6 +1,8 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Primitives/Rect.hpp"
+#include "Primitives/Sprite/Sprite.hpp"
+
 #include <vector>
 #include <map>
 
@@ -16,9 +18,9 @@ namespace game_engine {
  */
 class Animation {
 private:
-    std::vector<sf::IntRect> m_frames, m_rotated_frames;
+    std::vector<primitives::IntRect> m_frames, m_rotated_frames;
     float m_current_frame, m_animation_speed;
-    std::shared_ptr<sf::Sprite> m_sprite;
+    std::shared_ptr<primitives::Sprite> m_sprite;
 
 public:
     Animation() = delete;
@@ -35,7 +37,7 @@ public:
      * @param animation_speed Speed of animation in frames per second
      * @param step Distance between frames in the texture atlas (in pixels)
      */
-    Animation(const sf::Texture& texture, int x, int y, int width, int height, int frames_count, float animation_speed, int step);
+    Animation(const primitives::Texture& texture, int x, int y, int width, int height, int frames_count, float animation_speed, int step);
     ~Animation() = default;
 
     /**
@@ -48,7 +50,7 @@ public:
      * @param rotate Whether to use the rotated version of the frames
      * @return std::shared_ptr<sf::Sprite> Shared pointer to the sprite with updated animation frame
      */
-    std::shared_ptr<sf::Sprite> Tick(float time, bool rotate);
+    std::shared_ptr<primitives::Sprite> Tick(float time, bool rotate);
 };
 
 }

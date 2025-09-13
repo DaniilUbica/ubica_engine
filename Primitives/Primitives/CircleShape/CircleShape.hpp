@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Drawable.h"
 #include "CircleShapeFactory.hpp"
 
 namespace game_engine {
@@ -15,9 +16,9 @@ public:
     void setRadius(float radius) { m_impl->setRadius(radius); };
     void setFillColor(const Color& color) { m_impl->setFillColor(color); };
 
-    Color getFillColor() const {};
-    float getRadius() const {};
-    Vector2f getSize() const {};
+    Color getFillColor() const { return m_impl->getFillColor(); };
+    float getRadius() const { return m_impl->getRadius(); };
+    Vector2f getPosition() const { return m_impl->getPosition(); };
 
 private:
     std::shared_ptr<IDrawable> drawableImpl() const override { return m_impl; };

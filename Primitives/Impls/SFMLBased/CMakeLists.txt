@@ -17,6 +17,12 @@ set(SOURCES
 
 add_library(${UNIT_NAME} STATIC ${SOURCES})
 
+set(INCLUDE_DIRS 
+    PUBLIC SFML
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+    PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/Primitives
+)
+
 target_link_libraries(${UNIT_NAME} PUBLIC
     sfml-system
     sfml-window
@@ -24,7 +30,7 @@ target_link_libraries(${UNIT_NAME} PUBLIC
     sfml-audio
 )
 
-target_include_directories(${UNIT_NAME} PUBLIC SFML PRIVATE ${CMAKE_SOURCE_DIR}/ubica_engine/Primitives)
+target_include_directories(${UNIT_NAME} ${INCLUDE_DIRS})
 
 install(TARGETS ${UNIT_NAME}
     EXPORT ${UNIT_NAME}Targets

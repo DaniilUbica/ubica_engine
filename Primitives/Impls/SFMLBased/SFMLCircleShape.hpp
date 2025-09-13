@@ -1,6 +1,7 @@
 #pragma once
 
 #include "CircleShape/ICircleShape.h"
+#include "Helpers.hpp"
 
 #include <SFML/Graphics.hpp>
 

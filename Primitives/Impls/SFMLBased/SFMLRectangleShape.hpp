@@ -1,6 +1,9 @@
 #pragma once
 
-#include "RectangleShape/IRectangleShape.h"
+#include "Primitives/RectangleShape/IRectangleShape.h"
+#include "Vector2.hpp"
+#include "Color.h"
+#include "Helpers.hpp"
 
 #include <SFML/Graphics.hpp>
 

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 set(UNIT_NAME Primitives)
 
-option(USE_SFML "Use SFML as engine's graphic lib" OFF)
+option(USE_SFML "Use SFML as engine's graphic lib" ON)
 
 if(USE_SFML)
     add_subdirectory(Impls/SFMLBased)
@@ -10,51 +10,51 @@ endif()
 set(PRIMITIVES_SOURCES
     primitives.cpp
 
-    Config.h
-    Vector2.hpp
-    Rect.hpp
-    Drawable.h
-    IDrawable.h
-    Event.hpp
-    Color.h
+    Primitives/Config.h
+    Primitives/Vector2.hpp
+    Primitives/Rect.hpp
+    Primitives/Drawable.h
+    Primitives/IDrawable.h
+    Primitives/Event.hpp
+    Primitives/Color.h
     
-    Sprite/Sprite.hpp
-    Sprite/SpriteFactory.hpp
-    Sprite/ISprite.h
+    Primitives/Sprite/Sprite.hpp
+    Primitives/Sprite/SpriteFactory.hpp
+    Primitives/Sprite/ISprite.h
 
-    Texture/Texture.hpp
-    Texture/TextureFactory.hpp
-    Texture/ITexture.h
+    Primitives/Texture/Texture.hpp
+    Primitives/Texture/TextureFactory.hpp
+    Primitives/Texture/ITexture.h
 
-    Image/Image.hpp
-    Image/IImage.h
-    Image/ImageFactory.hpp
+    Primitives/Image/Image.hpp
+    Primitives/Image/IImage.h
+    Primitives/Image/ImageFactory.hpp
 
-    RectangleShape/RectangleShape.hpp
-    RectangleShape/IRectangleShape.h
-    RectangleShape/RectangleShapeFactory.hpp
+    Primitives/RectangleShape/RectangleShape.hpp
+    Primitives/RectangleShape/IRectangleShape.h
+    Primitives/RectangleShape/RectangleShapeFactory.hpp
 
-    CircleShape/CircleShape.hpp
-    CircleShape/ICircleShape.h
-    CircleShape/CircleShapeFactory.hpp
+    Primitives/CircleShape/CircleShape.hpp
+    Primitives/CircleShape/ICircleShape.h
+    Primitives/CircleShape/CircleShapeFactory.hpp
 
-    RenderWindow/RenderWindow.hpp 
-    RenderWindow/RenderWindowFactory.hpp
-    RenderWindow/IRenderWindow.h 
+    Primitives/RenderWindow/RenderWindow.hpp 
+    Primitives/RenderWindow/RenderWindowFactory.hpp
+    Primitives/RenderWindow/IRenderWindow.h 
 )
 
 add_library(${UNIT_NAME} STATIC ${PRIMITIVES_SOURCES})
 
 set(INCLUDE_DIRS 
-    ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/Sprite
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/Primitives
 )
 
 if(USE_SFML) 
     target_link_libraries(${UNIT_NAME} PUBLIC SFMLBased)
 endif()
 
-target_include_directories(${UNIT_NAME} PUBLIC ${INCLUDE_DIRS})
+target_include_directories(${UNIT_NAME} ${INCLUDE_DIRS})
 
 file(WRITE ${CMAKE_CURRENT_SOURCE_DIR}/Config.h "#pragma once\n")
 if(USE_SFML)

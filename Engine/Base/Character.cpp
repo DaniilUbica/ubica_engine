@@ -3,7 +3,7 @@
 using namespace game_engine;
 using namespace ui;
 
-Character::Character(const sf::Texture& texture) : Drawable(texture) {}
+Character::Character(const sf::Texture& texture) {}
 
 void Character::takeDamage(float damage) {
     m_health -= damage;

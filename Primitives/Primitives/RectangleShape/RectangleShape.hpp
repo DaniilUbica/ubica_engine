@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Drawable.h"
 #include "RectangleShapeFactory.hpp"
 
 namespace game_engine {
@@ -15,9 +16,9 @@ public:
     void setSize(const Vector2f& size) { m_impl->setSize(size); };
     void setFillColor(const Color& color) { m_impl->setFillColor(color); };
 
-    Color getFillColor() const {};
-    Vector2f getPosition() const {};
-    Vector2f getSize() const {};
+    Color getFillColor() const { return m_impl->getFillColor(); };
+    Vector2f getPosition() const { return m_impl->getPosition(); };
+    Vector2f getSize() const { return m_impl->getSize(); };
 
 private:
     std::shared_ptr<IDrawable> drawableImpl() const override { return m_impl; };
