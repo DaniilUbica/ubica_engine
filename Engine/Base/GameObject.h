@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Drawable.h"
+#include "DrawableObject.h"
 #include "Primitives/Vector2.hpp"
 #include "Primitives/Texture/Texture.hpp"
 
@@ -15,7 +15,7 @@ namespace game_engine {
  * size, and visual representation through a sprite. This is an abstract
  * base class designed to be inherited by specific game object types.
  */
-class GameObject : public Drawable {
+class GameObject : public SpriteObject {
 protected:
     primitives::Vector2f m_size;
     primitives::Vector2f m_pos;

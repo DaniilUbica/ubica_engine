@@ -5,6 +5,13 @@ using namespace game_engine;
 
 World* World::m_world = nullptr;
 
+void World::draw(const primitives::RenderWindow& window) {
+    for (const auto& sprite : m_border_sprites) {
+        window.draw(sprite);
+    }
+    window.draw(*m_background_sprite);
+}
+
 World::~World() {
     m_world = nullptr;
 }

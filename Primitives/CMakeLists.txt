@@ -17,6 +17,7 @@ set(PRIMITIVES_SOURCES
     Primitives/IDrawable.h
     Primitives/Event.hpp
     Primitives/Color.h
+    Primitives/Clock.hpp
     
     Primitives/Sprite/Sprite.hpp
     Primitives/Sprite/SpriteFactory.hpp

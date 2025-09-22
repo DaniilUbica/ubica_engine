@@ -38,8 +38,8 @@ public:
      */
     void Update(float time);
     
-    primitives::CircleShape getShape() { return m_shape; };
-    float getLifetime() { return m_lifetime; };
+    primitives::CircleShape getShape() const { return m_shape; };
+    float getLifetime() const { return m_lifetime; };
 };
 
 /**

@@ -2,6 +2,7 @@
 
 #include "Drawable.h"
 #include "RectangleShapeFactory.hpp"
+#include "RenderWindow/RenderWindow.hpp"
 
 namespace game_engine {
 namespace primitives {
@@ -19,6 +20,8 @@ public:
     Color getFillColor() const { return m_impl->getFillColor(); };
     Vector2f getPosition() const { return m_impl->getPosition(); };
     Vector2f getSize() const { return m_impl->getSize(); };
+
+    void draw(const RenderWindow& window) override { window.draw(*this); };
 
 private:
     std::shared_ptr<IDrawable> drawableImpl() const override { return m_impl; };

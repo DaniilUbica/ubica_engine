@@ -42,16 +42,14 @@ ParticleSystem* ParticleSystem::instance() {
 }
 
 void ParticleSystem::Update(float time) {
-	for (auto& particle : m_particles) {
-		particle.Update(time);
+    for (auto& particle : m_particles) {
+        particle.Update(time);
+    }
 
-		auto iter = std::find_if(m_particles.begin(), m_particles.end(), [](Particle particle){
-			return particle.getLifetime() <= 0;
-		});
-		if (iter != m_particles.end()) {
-			m_particles.erase(iter);
-		}
-	}
+    m_particles.erase(std::remove_if(m_particles.begin(), m_particles.end(),
+                       [](const Particle& particle) {
+                           return particle.getLifetime() <= 0.0f;
+                       }), m_particles.end());
 }
 
 void ParticleSystem::burstingBubble(primitives::Vector2f pos, const primitives::Texture& texture) {

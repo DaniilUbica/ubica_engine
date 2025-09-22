@@ -1,5 +1,7 @@
 #pragma once
 
+#include "Base/DrawableObject.h"
+#include "Primitives/RenderWindow/RenderWindow.hpp"
 #include "Primitives/Texture/Texture.hpp"
 #include "Primitives/Sprite/Sprite.hpp"
 
@@ -13,7 +15,7 @@ namespace game_engine {
  * the game world's background and border elements. It implements the singleton
  * pattern to ensure only one world instance exists throughout the game.
  */
-class World {
+class World : public DrawableObject {
 private:
     static World*              m_world;
 
@@ -23,6 +25,9 @@ private:
     std::vector<primitives::Sprite>     m_border_sprites;
 
     World() {};
+
+    void draw(const primitives::RenderWindow& window) override;
+
 public:
     World(World const& world) = delete;
     void operator=(World const&) = delete;

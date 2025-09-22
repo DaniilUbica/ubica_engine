@@ -3,6 +3,7 @@
 #include "SpriteFactory.hpp"
 #include "Sprite/ISprite.h"
 #include "Texture/Texture.hpp"
+#include "RenderWindow/RenderWindow.hpp"
 #include "Drawable.h"
 
 namespace game_engine {
@@ -21,6 +22,8 @@ public:
 
     FloatRect getGlobalBounds() const { return m_impl->getGlobalBounds(); };
     IntRect getTextureRect() const { return m_impl->getTextureRect(); };
+
+    void draw(const RenderWindow& window) override { window.draw(*this); };
 
 private:
     std::shared_ptr<IDrawable> drawableImpl() const override { return m_impl; };

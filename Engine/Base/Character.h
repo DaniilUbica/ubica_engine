@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Drawable.h"
+#include "DrawableObject.h"
 #include "Animation/Animation.h"
 
 namespace game_engine {
@@ -28,7 +28,7 @@ enum class Direction : bool {
  * common to all characters in the game. This is an abstract base class
  * that must be derived to create specific character types.
  */
-class Character : public std::enable_shared_from_this<Character>, public Drawable {
+class Character : public std::enable_shared_from_this<Character>, public SpriteObject {
 protected:
     float		                   m_health;
     float		                   m_speed;
