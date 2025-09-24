@@ -1,6 +1,7 @@
 #pragma once
 
 #include <bitset>
+#include <stdint.h>
 
 #include "Vector2.hpp"
 
