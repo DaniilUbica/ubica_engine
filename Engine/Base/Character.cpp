@@ -3,7 +3,7 @@
 using namespace game_engine;
 using namespace ui;
 
-Character::Character(const sf::Texture& texture) : Drawable(texture) {}
+Character::Character(const game_engine::primitives::Texture& texture) : SpriteObject(texture) {}
 
 void Character::takeDamage(float damage) {
     m_health -= damage;
@@ -13,7 +13,7 @@ void Character::addHP(float health) {
     m_health += health;
 }
 
-void Character::setPosition(const sf::Vector2f& pos) {
+void Character::setPosition(const game_engine::primitives::Vector2f& pos) {
     m_pos = pos;
 }
 
@@ -25,11 +25,11 @@ float Character::getHP() const {
     return m_health;
 }
 
-sf::Vector2f Character::getSize() const {
+game_engine::primitives::Vector2f Character::getSize() const {
     return m_size;
 }
 
-sf::Vector2f Character::getPosition() const {
+game_engine::primitives::Vector2f Character::getPosition() const {
     return m_pos;
 }
 

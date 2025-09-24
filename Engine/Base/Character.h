@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Drawable.h"
+#include "DrawableObject.h"
 #include "Animation/Animation.h"
 
 namespace game_engine {
@@ -28,18 +28,18 @@ enum class Direction : bool {
  * common to all characters in the game. This is an abstract base class
  * that must be derived to create specific character types.
  */
-class Character : public std::enable_shared_from_this<Character>, public Drawable {
+class Character : public std::enable_shared_from_this<Character>, public SpriteObject {
 protected:
     float		                   m_health;
     float		                   m_speed;
-    sf::Vector2f                   m_size;
-    sf::Vector2f                   m_pos;
+    game_engine::primitives::Vector2f                   m_size;
+    game_engine::primitives::Vector2f                   m_pos;
     std::unique_ptr<Animation>     m_run_animation;
     std::shared_ptr<ui::HealthBar> m_health_bar;
     Direction                      m_direction = Direction::RIGHT;
 
 public:
-    Character(const sf::Texture& texture);
+    Character(const game_engine::primitives::Texture& texture);
     virtual ~Character() = default;
 
     /**
@@ -64,7 +64,7 @@ public:
      * @brief Sets the character's position.
      * @param pos New position coordinates
      */
-    void setPosition(const sf::Vector2f& pos);
+    void setPosition(const game_engine::primitives::Vector2f& pos);
 
     /**
      * @brief Sets the character's facing direction.
@@ -73,8 +73,8 @@ public:
     void setDirection(Direction direction);
 
     float getHP() const;
-    sf::Vector2f getSize() const;
-    sf::Vector2f getPosition() const;
+    game_engine::primitives::Vector2f getSize() const;
+    game_engine::primitives::Vector2f getPosition() const;
     Direction getDirection() const;
     std::shared_ptr<ui::HealthBar> getHealthBar() const;
 };

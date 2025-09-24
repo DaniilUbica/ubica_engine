@@ -5,12 +5,11 @@ using namespace game_engine;
 
 World* World::m_world = nullptr;
 
-void World::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-    for (const auto sprite : m_border_sprites) {
-        target.draw(sprite, states);
+void World::draw(const primitives::RenderWindow& window) {
+    window.draw(*m_background_sprite);
+    for (const auto& sprite : m_border_sprites) {
+        window.draw(sprite);
     }
-
-    target.draw(*m_background_sprite, states);
 }
 
 World::~World() {
@@ -25,7 +24,7 @@ World* World::getWorld() {
     return m_world;
 }
 
-void World::initWorld(const sf::Texture& background, const sf::Texture& border) {
+void World::initWorld(const primitives::Texture& background, const primitives::Texture& border) {
     m_background_texture = background;
     m_border_texture = border;
 
@@ -33,33 +32,33 @@ void World::initWorld(const sf::Texture& background, const sf::Texture& border) 
     int tiles_amount_height = static_cast<int>(WORLD_HEIGHT / SPRITE_SIZE) + 1;
 
     for (int i = 0; i < tiles_amount_width; i++) {
-        sf::Sprite tile_sprite(m_border_texture);
+        primitives::Sprite tile_sprite(m_border_texture);
         tile_sprite.setPosition({ i * SPRITE_SIZE, 0.0 });
         m_border_sprites.push_back(tile_sprite);
     }
     for (int i = 0; i < tiles_amount_width; i++) {
-        sf::Sprite tile_sprite(m_border_texture);
+        primitives::Sprite tile_sprite(m_border_texture);
         tile_sprite.setPosition({ i * SPRITE_SIZE, WORLD_HEIGHT });
         m_border_sprites.push_back(tile_sprite);
     }
     for (int i = 0; i < tiles_amount_height; i++) {
-        sf::Sprite tile_sprite(m_border_texture);
+        primitives::Sprite tile_sprite(m_border_texture);
         tile_sprite.setPosition({ 0.0, i * SPRITE_SIZE });
         m_border_sprites.push_back(tile_sprite);
     }
     for (int i = 0; i < tiles_amount_height; i++) {
-        sf::Sprite tile_sprite(m_border_texture);
+        primitives::Sprite tile_sprite(m_border_texture);
         tile_sprite.setPosition({ WORLD_WIDTH, i * SPRITE_SIZE });
         m_border_sprites.push_back(tile_sprite);
     }
 
-    m_background_sprite = std::make_shared<sf::Sprite>(m_background_texture);
+    m_background_sprite = std::make_shared<primitives::Sprite>(m_background_texture);
 }
 
-std::vector<sf::Sprite> World::getBorderSprites() const {
+std::vector<primitives::Sprite> World::getBorderSprites() const {
     return m_border_sprites;
 }
 
-std::shared_ptr<sf::Sprite> World::getBackgroundSprite() const {
+std::shared_ptr<primitives::Sprite> World::getBackgroundSprite() const {
     return m_background_sprite;
 }

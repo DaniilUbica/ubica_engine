@@ -1,6 +1,9 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "Primitives/CircleShape/CircleShape.hpp"
+#include "Primitives/RenderWindow/RenderWindow.hpp"
+#include "Primitives/Texture/Texture.hpp"
+#include "Primitives/Vector2.hpp"
 
 namespace game_engine {
 
@@ -14,8 +17,8 @@ namespace game_engine {
  */
 class Particle {
 private:
-    sf::CircleShape m_shape;
-    sf::Vector2f    m_velocity;
+    primitives::CircleShape m_shape;
+    primitives::Vector2f    m_velocity;
     float           m_lifetime;
     
 public:
@@ -25,7 +28,7 @@ public:
      * @param pos The initial position of the particle
      * @param color The color of the particle
      */
-    Particle(sf::Vector2f pos, sf::Color& color);
+    Particle(primitives::Vector2f pos, primitives::Color& color);
 
     /**
      * @brief Updates the particle's state based on elapsed time.
@@ -35,8 +38,8 @@ public:
      */
     void Update(float time);
     
-    sf::CircleShape getShape() { return m_shape; };
-    float getLifetime() { return m_lifetime; };
+    primitives::CircleShape getShape() const { return m_shape; };
+    float getLifetime() const { return m_lifetime; };
 };
 
 /**
@@ -74,13 +77,13 @@ public:
      * @param pos The position where the bubble burst effect should occur
      * @param texture The texture to take color for the bubble particles
      */
-    void burstingBubble(sf::Vector2f pos, const sf::Texture& texture);
+    void burstingBubble(primitives::Vector2f pos, const primitives::Texture& texture);
 
     /**
      * @brief Renders all particles to the specified window.
      * @param window The render window to draw particles on
      */
-    void drawParticles(sf::RenderWindow& window);
+    void drawParticles(primitives::RenderWindow& window);
 };
 
 }
