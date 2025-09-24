@@ -18,7 +18,7 @@ public:
     void display() { m_impl->display(); };
     [[nodiscard]] std::unique_ptr<Event> pollEvent() const { return m_impl->pollEvent(); };
     void draw(const Drawable& drawable) const { m_impl->draw(drawable.drawableImpl()); };
-    void setView(const View& view) {  };
+    void setView(const View& view) { m_impl->setView(view); };
 
     bool isOpen() const { return m_impl->isOpen(); };
 

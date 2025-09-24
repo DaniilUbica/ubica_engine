@@ -1,3 +1,13 @@
+/*
+ * This code was adapted from the SFML repository
+ * https://github.com/SFML/SFML
+ * Original file: SFML/include/SFML/System/Clock.hpp
+ *
+ * Modifications made:
+ * - Changed time storage to microseconds (int64_t) instead of Time objects
+ * - Removed SFML-specific dependencies
+ */
+
 #pragma once
 
 #include <chrono>
@@ -7,12 +17,7 @@ namespace primitives {
 
 namespace {
 
-class ClockImpl {
-public:
-    static std::chrono::steady_clock::time_point now() {
-        return std::chrono::steady_clock::now();
-    }
-};
+using ClockImpl = std::conditional_t<std::chrono::high_resolution_clock::is_steady, std::chrono::high_resolution_clock, std::chrono::steady_clock>;
 
 }
 
@@ -33,7 +38,7 @@ public:
     }
 
     int64_t restart() {
-        auto elapsed = getElapsedTime();
+        const auto elapsed = getElapsedTime();
         m_refPoint = ClockImpl::now();
         m_stopPoint = {};
 
@@ -49,17 +54,12 @@ public:
     }
 
     [[nodiscard]] int64_t getElapsedTime() const {
-        if (isRunning()) {
-            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(ClockImpl::now() - m_refPoint);
-            return static_cast<int64_t>(duration.count());
-        }
-        else {
-            const auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(m_stopPoint - m_refPoint);
-            return static_cast<int64_t>(duration.count());
-        }
+        if (isRunning())
+            return std::chrono::duration_cast<std::chrono::microseconds>(ClockImpl::now() - m_refPoint).count();
+        return std::chrono::duration_cast<std::chrono::microseconds>(m_stopPoint - m_refPoint).count();
     }
 
-    [[nodiscard]] bool isRunning() const { return m_stopPoint == m_refPoint; };
+    [[nodiscard]] bool isRunning() const { return m_stopPoint == ClockImpl::time_point(); };
 
 private:
     std::chrono::steady_clock::time_point m_refPoint{ ClockImpl::now() };

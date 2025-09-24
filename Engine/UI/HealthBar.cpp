@@ -3,6 +3,12 @@
 using namespace game_engine;
 using namespace ui;
 
+void HealthBar::draw(const primitives::RenderWindow& window) {
+    window.draw(m_border);
+    window.draw(m_background);
+    window.draw(m_health_bar);
+}
+
 HealthBar::HealthBar(primitives::Vector2f size, primitives::Vector2f pos, float health, primitives::Color border_color,
     primitives::Color background_color, primitives::Color health_color, bool is_static, primitives::Vector2f parent_size) {
 

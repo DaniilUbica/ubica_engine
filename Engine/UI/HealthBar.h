@@ -1,6 +1,8 @@
 #pragma once
 
+#include "Base/DrawableObject.h"
 #include "Primitives/RectangleShape/RectangleShape.hpp"
+#include "Primitives/RenderWindow/RenderWindow.hpp"
 #include "Primitives/Vector2.hpp"
 
 namespace game_engine {
@@ -14,7 +16,7 @@ namespace ui {
  * a border, background, and filled health portion. It can be used as either a static UI element
  * or dynamically positioned relative to a parent object (like a character).
  */
-class HealthBar {
+class HealthBar : public DrawableObject {
 private:
     primitives::RectangleShape m_border;
     primitives::RectangleShape m_background;
@@ -27,6 +29,8 @@ private:
     float              m_border_size = 2.0;
     float              m_parent_offset = 7.0;
     bool               m_is_static;
+
+    void draw(const primitives::RenderWindow& window) override;
 
 public:
 
