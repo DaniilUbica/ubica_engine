@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdint.h>
+
 #include "Primitives/Font/Font.hpp"
 
 namespace game_engine {
