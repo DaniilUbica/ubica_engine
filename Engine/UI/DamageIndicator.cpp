@@ -1,5 +1,7 @@
 #include "DamageIndicator.h"
 
+#include <stdint.h>
+
 using namespace game_engine;
 using namespace game_engine::ui;
 
