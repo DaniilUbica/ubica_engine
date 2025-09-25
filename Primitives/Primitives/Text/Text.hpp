@@ -3,6 +3,8 @@
 #include "TextFactory.hpp"
 #include "Font/Font.hpp"
 
+#include <stdint.h>
+
 namespace game_engine {
 namespace primitives {
 
