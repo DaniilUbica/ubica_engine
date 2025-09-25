@@ -9,6 +9,7 @@ set(ENGINE_SOURCES
     Engine/Base/GameObject.cpp
     Engine/Base/DrawableObject.cpp
     Engine/UI/HealthBar.cpp
+    Engine/UI/DamageIndicator.cpp
     Engine/Particles/ParticleSystem.cpp
     Engine/Base/Pickable.cpp 
     Engine/Core/Timer.cpp 
@@ -19,6 +20,7 @@ set(ENGINE_SOURCES
     Engine/Base/GameObject.h
     Engine/Base/DrawableObject.h
     Engine/UI/HealthBar.h
+    Engine/UI/DamageIndicator.h
     Engine/Particles/ParticleSystem.h
     Engine/Base/Pickable.h 
     Engine/Core/Timer.h 

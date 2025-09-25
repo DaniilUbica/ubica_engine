@@ -28,15 +28,18 @@ enum class Direction : bool {
  * common to all characters in the game. This is an abstract base class
  * that must be derived to create specific character types.
  */
-class Character : public std::enable_shared_from_this<Character>, public SpriteObject {
+class Character : public SpriteObject {
 protected:
-    float		                   m_health;
-    float		                   m_speed;
-    game_engine::primitives::Vector2f                   m_size;
-    game_engine::primitives::Vector2f                   m_pos;
-    std::unique_ptr<Animation>     m_run_animation;
-    std::shared_ptr<ui::HealthBar> m_health_bar;
-    Direction                      m_direction = Direction::RIGHT;
+    float		                      m_health;
+    float		                      m_speed;
+    game_engine::primitives::Vector2f m_size;
+    game_engine::primitives::Vector2f m_pos;
+    std::unique_ptr<Animation>        m_run_animation;
+    std::shared_ptr<ui::HealthBar>    m_health_bar;
+    Direction                         m_direction = Direction::RIGHT;
+
+private:
+    void createDamageIndicator(int damage);
 
 public:
     Character(const game_engine::primitives::Texture& texture);
@@ -52,7 +55,7 @@ public:
      * @brief Applies damage to the character.
      * @param damage Amount of damage to apply
      */
-    virtual void takeDamage(float damage);
+    virtual void takeDamage(float damage, bool showIndicator = true);
 
     /**
      * @brief Restores health to the character.
