@@ -46,6 +46,14 @@ set(PRIMITIVES_SOURCES
     Primitives/View/View.hpp 
     Primitives/View/ViewFactory.hpp
     Primitives/View/IView.h 
+
+    Primitives/Text/IText.h 
+    Primitives/Text/Text.hpp 
+    Primitives/Text/TextFactory.hpp
+
+    Primitives/Font/IFont.h 
+    Primitives/Font/Font.hpp 
+    Primitives/Font/FontFactory.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${PRIMITIVES_SOURCES})

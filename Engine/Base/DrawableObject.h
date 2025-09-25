@@ -17,37 +17,19 @@ namespace game_engine {
  * @note This class uses the RAII (Resource Acquisition Is Initialization) pattern
  *       to manage SFML resources and automatically handles memory cleanup.
  */
-class DrawableObject {
+class DrawableObject : public std::enable_shared_from_this<DrawableObject> {
 private:
     static std::vector<DrawableObject*> s_drawables;
-
-    bool m_have_sprite = true;
+    static bool s_needSort;
 
 protected:
-    game_engine::primitives::Texture m_texture;
-    std::shared_ptr<game_engine::primitives::Sprite> m_sprite;
+    int m_z = 0;
 
 public:
 
-    /**
-     * @brief Constructs a DrawableObject object with an optional texture.
-     * @param texture The SFML texture to be used for this drawable object.
-     *               Defaults to an empty texture if not provided.
-     *
-     * @note The object is automatically added to the static drawables list
-     *       upon construction.
-     */
-    DrawableObject(const game_engine::primitives::Texture& texture = {});
+    DrawableObject();
 
-    /**
-     * @brief Constructs a DrawableObject object from an existing SFML drawable.
-     * @param drawable Pointer to an SFML drawable object to be wrapped.
-     *
-     * @warning This constructor is intended for advanced use cases where
-     *          existing SFML drawables need to be integrated into the
-     *          game engine's drawing system.
-     */
-    DrawableObject(game_engine::primitives::Drawable* drawable);
+    DrawableObject(int z);
 
     /**
      * @brief Virtual destructor for proper polymorphic destruction.
@@ -77,7 +59,9 @@ public:
      */
     static void drawAllDrawableObjects(game_engine::primitives::RenderWindow& window);
 
-    std::shared_ptr<game_engine::primitives::Sprite> getSprite() const { return m_sprite; };
+    void setZ(int z);
+    
+    int z() const { return m_z; };
 };
 
 /**
@@ -86,9 +70,18 @@ public:
  * Provides automatic drawing implementation for objects with sprites.
  */
 class SpriteObject : public DrawableObject {
-    using DrawableObject::DrawableObject;
-
 public:
+
+    /**
+     * @brief Constructs a DrawableObject object with an optional texture.
+     * @param texture The SFML texture to be used for this drawable object.
+     *               Defaults to an empty texture if not provided.
+     *
+     * @note The object is automatically added to the static drawables list
+     *       upon construction.
+     */
+    SpriteObject(const game_engine::primitives::Texture& texture = {});
+
     /**
      * @brief Automatic drawing implementation for sprite-based objects.
      * Derived classes don't need to override this method.
@@ -98,6 +91,12 @@ public:
             window.draw(*m_sprite);
         }
     }
+
+    std::shared_ptr<game_engine::primitives::Sprite> getSprite() const { return m_sprite; };
+
+protected:
+    game_engine::primitives::Texture m_texture;
+    std::shared_ptr<game_engine::primitives::Sprite> m_sprite;
 };
 
 }

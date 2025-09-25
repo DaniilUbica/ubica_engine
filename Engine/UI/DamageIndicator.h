@@ -1,6 +1,9 @@
 #pragma once
 
-#include "Base/Drawable.h"
+#include "Base/DrawableObject.h"
+
+#include "Primitives/Font/Font.hpp"
+#include "Primitives/Text/Text.hpp"
 
 namespace game_engine {
 namespace ui {
@@ -20,40 +23,39 @@ namespace {
 class DamageIndicatorsHolder {
 private:
     static std::vector<indicator_t> m_indicators;
-    static DamageIndicatorsHolder* m_instance;
 
     DamageIndicatorsHolder() = default;
-
-    static DamageIndicatorsHolder* instance();
 
 public:
     DamageIndicatorsHolder(const DamageIndicatorsHolder&) = delete;
     void operator=(const DamageIndicatorsHolder&) = delete;
 
     static void Update(float time);
-    static void addIndicator(const sf::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const sf::Font& font, uint size, const sf::Color& borderColor, const sf::Color& textColor);
+    static void addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, uint size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
 };
 
-class DamageIndicator : public Drawable, public sf::Drawable {
+class DamageIndicator : public DrawableObject {
 private:
     int m_damage = 0;
     float m_textSpeed = 0.f;
     bool m_stopped = false;
 
     damage_indicator::Direction m_textDirection;
-    std::unique_ptr<sf::Text> m_damageText;
-    std::unique_ptr<sf::Text> m_damageTextBorder;
-    sf::Vector2f m_currentPos;
-    sf::Vector2f m_startPos;
-    sf::Font m_font;
+    std::unique_ptr<primitives::Text> m_damageText;
+    std::unique_ptr<primitives::Text> m_damageTextBorder;
+    primitives::Vector2f m_currentPos;
+    primitives::Vector2f m_startPos;
+    primitives::Font m_font;
 
-    sf::Vector2f getTextBordersPos();
+    std::weak_ptr<DrawableObject> m_parent;
+
+    primitives::Vector2f getTextBordersPos();
 
 protected:
-    void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+    void draw(const primitives::RenderWindow& window) override;
 
 public:
-    DamageIndicator(const sf::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const sf::Font& font, uint size, const sf::Color& borderColor, const sf::Color& textColor);
+    DamageIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, uint size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
     ~DamageIndicator() {};
 
     void Update(float time);

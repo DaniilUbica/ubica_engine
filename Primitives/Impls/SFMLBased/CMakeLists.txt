@@ -13,6 +13,8 @@ set(SOURCES
     SFMLRectangleShape.hpp
     SFMLCircleShape.hpp
     SFMLView.hpp
+    SFMLText.hpp
+    SFMLFont.hpp
     Helpers.hpp
 )
 
