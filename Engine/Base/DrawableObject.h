@@ -4,6 +4,8 @@
 #include "Primitives/Sprite/Sprite.hpp"
 #include "Primitives/RenderWindow/RenderWindow.hpp"
 
+#include "TransformableObject.h"
+
 namespace game_engine {
 
 /**
@@ -69,7 +71,7 @@ public:
  * @brief Base class for drawable objects that use sprites.
  * Provides automatic drawing implementation for objects with sprites.
  */
-class SpriteObject : public DrawableObject {
+class SpriteObject : public DrawableObject, public TransformableObject {
 public:
 
     /**

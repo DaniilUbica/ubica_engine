@@ -24,24 +24,12 @@ void Character::addHP(float health) {
     m_health += health;
 }
 
-void Character::setPosition(const game_engine::primitives::Vector2f& pos) {
-    m_pos = pos;
-}
-
 void Character::setDirection(Direction direction) {
     m_direction = direction;
 }
 
 float Character::getHP() const {
     return m_health;
-}
-
-game_engine::primitives::Vector2f Character::getSize() const {
-    return m_size;
-}
-
-game_engine::primitives::Vector2f Character::getPosition() const {
-    return m_pos;
 }
 
 Direction Character::getDirection() const {

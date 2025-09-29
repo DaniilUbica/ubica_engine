@@ -25,4 +25,9 @@ constexpr int BURSTING_BUBBLE_PARTICLES_COUNT = 100;
 
 constexpr int SPRITE_OBJECT_Z = 2;
 
+constexpr float MIN_ATTRACTION_SPEED    = 0.0001f;
+constexpr float MAX_ATTRACTION_SPEED    = 0.2f;
+constexpr float MIN_ATTRACTION_DISTANCE = 5.f;
+constexpr float MAX_ATTRACTION_DISTANCE = 250.f;
+
 }

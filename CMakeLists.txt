@@ -8,8 +8,10 @@ set(ENGINE_SOURCES
     Engine/Base/Character.cpp
     Engine/Base/GameObject.cpp
     Engine/Base/DrawableObject.cpp
+    Engine/Base/TransformableObject.cpp
     Engine/UI/HealthBar.cpp
     Engine/UI/DamageIndicator.cpp
+    Engine/Physics/ObjectsAttractionManager.cpp
     Engine/Particles/ParticleSystem.cpp
     Engine/Base/Pickable.cpp 
     Engine/Core/Timer.cpp 
@@ -19,8 +21,10 @@ set(ENGINE_SOURCES
     Engine/Base/Character.h 
     Engine/Base/GameObject.h
     Engine/Base/DrawableObject.h
+    Engine/Base/TransformableObject.h
     Engine/UI/HealthBar.h
     Engine/UI/DamageIndicator.h
+    Engine/Physics/ObjectsAttractionManager.h
     Engine/Particles/ParticleSystem.h
     Engine/Base/Pickable.h 
     Engine/Core/Timer.h 

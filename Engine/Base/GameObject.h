@@ -17,16 +17,12 @@ namespace game_engine {
  */
 class GameObject : public SpriteObject {
 protected:
-    primitives::Vector2f m_size;
-    primitives::Vector2f m_pos;
-
     GameObject(const primitives::Texture& texture);
     GameObject() = default;
     virtual ~GameObject() = default;
 
 public:
-    primitives::Vector2f getPosition() const;
-    primitives::Vector2f getSize() const;
+    virtual void Update(float time);
 };
 
 }

@@ -45,7 +45,8 @@ void DrawableObject::setZ(int z) {
     }
 }
 
-SpriteObject::SpriteObject(const game_engine::primitives::Texture& texture) : DrawableObject(SPRITE_OBJECT_Z) {
+SpriteObject::SpriteObject(const game_engine::primitives::Texture& texture) : DrawableObject(SPRITE_OBJECT_Z), TransformableObject() {
     m_texture = texture;
     m_sprite = std::make_shared<game_engine::primitives::Sprite>(m_texture);
+    init(*m_sprite);
 }

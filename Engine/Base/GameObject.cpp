@@ -4,10 +4,6 @@ using namespace game_engine;
 
 GameObject::GameObject(const primitives::Texture& texture) : SpriteObject(texture) {}
 
-primitives::Vector2f GameObject::getPosition() const {
-    return m_pos;
-}
-
-primitives::Vector2f GameObject::getSize() const {
-    return m_size;
+void GameObject::Update(float time) {
+    m_sprite->setPosition(m_pos);
 }
