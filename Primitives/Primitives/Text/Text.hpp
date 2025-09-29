@@ -10,14 +10,14 @@ namespace primitives {
 
 class Text : public Drawable {
 public:
-    Text(const Font& font, const std::string& text = "", uint size = 32) : m_impl(createText(font.m_impl)) {
+    Text(const Font& font, const std::string& text = "", unsigned int size = 32) : m_impl(createText(font.m_impl)) {
         setText(text);
         setSize(size);
     };
 
     void setText(const std::string& text) { m_impl->setText(text); };
     void setPosition(const Vector2f& pos) { m_impl->setPosition(pos); };
-    void setSize(uint size) { m_impl->setSize(size); };
+    void setSize(unsigned int size) { m_impl->setSize(size); };
     void setFillColor(const Color& color) { m_impl->setFillColor(color); };
 
     [[nodiscard]] Vector2f getPosition() const { return m_impl->getPosition(); };
