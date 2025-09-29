@@ -5,7 +5,7 @@
 using namespace game_engine;
 using namespace game_engine::ui;
 
-static const uint TEXT_BORDER_SIZE = 1;
+static const unsigned int TEXT_BORDER_SIZE = 1;
 static const float TEXT_PATH_LENGTH = 100.0;
 
 std::vector<indicator_t> DamageIndicatorsHolder::m_indicators = {};
@@ -22,7 +22,7 @@ void DamageIndicatorsHolder::Update(float time) {
     );
 }
 
-void DamageIndicatorsHolder::addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, uint size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent) {
+void DamageIndicatorsHolder::addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, unsigned int size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent) {
     m_indicators.push_back(std::make_unique<DamageIndicator>(pos, damage, speed, direction, font, size, borderColor, textColor, parent));
 }
 
@@ -38,7 +38,7 @@ void DamageIndicator::draw(const primitives::RenderWindow& window) {
     window.draw(*m_damageText);
 }
 
-DamageIndicator::DamageIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, uint size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent) {
+DamageIndicator::DamageIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, unsigned int size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent) {
     m_damage = damage;
     m_textSpeed = speed;
     m_textDirection = direction;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GameObject.h"
+#include "Character.h"
 
 namespace game_engine {
 
@@ -15,6 +16,10 @@ namespace game_engine {
 class Pickable : public GameObject {
 protected:
     bool m_picked = false;
+    bool m_attractable = false;
+    std::shared_ptr<Character> m_character;
+
+    Pickable(std::shared_ptr<Character> character, const primitives::Texture& texture, primitives::Vector2f pos, bool attractable = false);
 
     /**
      * @brief Common handling logic for when an object is picked up.
@@ -36,7 +41,8 @@ public:
      */
     virtual void onPicked() = 0;
 
-    bool getPicked() const;
+    bool picked() const { return m_picked; };
+    bool attractable() const { return m_attractable; };
 };
 
 }

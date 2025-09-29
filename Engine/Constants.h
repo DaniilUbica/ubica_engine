@@ -6,8 +6,8 @@
 
 namespace game_engine {
 
-const primitives::Font FONT = { "ByteBounce.ttf" };
-const uint FONT_SIZE        = 26;
+const primitives::Font FONT  = { "ByteBounce.ttf" };
+const unsigned int FONT_SIZE = 26;
 
 const float DAMAGE_INDICATOR_SPEED = 0.04f;
 

@@ -2,6 +2,8 @@
 
 #include "Constants.h"
 
+#include <cmath>
+
 using namespace game_engine;
 using namespace physics;
 

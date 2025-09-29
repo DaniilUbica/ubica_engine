@@ -31,7 +31,7 @@ public:
     void operator=(const DamageIndicatorsHolder&) = delete;
 
     static void Update(float time);
-    static void addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, uint size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
+    static void addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, unsigned int size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
 };
 
 class DamageIndicator : public DrawableObject {
@@ -55,7 +55,7 @@ protected:
     void draw(const primitives::RenderWindow& window) override;
 
 public:
-    DamageIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, uint size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
+    DamageIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, unsigned int size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
     ~DamageIndicator() {};
 
     void Update(float time);
