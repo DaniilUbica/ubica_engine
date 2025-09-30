@@ -20,9 +20,9 @@ public:
     }
 
     static void deleteExpiredTimers() {
-        std::erase_if(m_timers, [](const weak_timer_t& timer) {
+        m_timers.erase(std::remove_if(m_timers.begin(), m_timers.end(), [](const auto& timer) {
             return timer.expired();
-        });
+        }), m_timers.end());
     }
 
     static void pauseAllTimers() {
