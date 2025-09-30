@@ -19,12 +19,20 @@ namespace game_engine {
  */
 class Timer {
 private:
-    float m_time;
+    float m_time{0};
+    float m_remainingTime{0};
+    std::chrono::steady_clock::time_point m_pauseTime;
+
     std::atomic<bool> m_running{false};
+    std::atomic<bool> m_paused{false};
     std::atomic<bool> m_stop{false};
+
     std::thread m_thread;
     std::condition_variable m_cv;
-    std::mutex m_mutex;
+    mutable std::mutex m_mutex;
+    
+
+    void runTimer();
 
 public:
     Timer(float time);
@@ -37,6 +45,12 @@ public:
      * The timer can be checked for completion using isRunning().
      */
     void Start();
+
+    void Stop();
+
+    void Pause();
+
+    void Resume();
 
     /**
      * @brief Sets a new duration for the timer.
@@ -51,7 +65,9 @@ public:
      * @brief Checks if the timer is currently running.
      * @return bool True if the timer is running, false otherwise
      */
-    bool isRunning();
+    bool isRunning() const;
+    bool isPaused() const;
+    float getRemainingTime() const;
 };
 
 }

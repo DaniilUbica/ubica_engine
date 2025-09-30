@@ -16,7 +16,8 @@ set(ENGINE_SOURCES
     Engine/Base/Pickable.cpp 
     Engine/Core/Timer.cpp 
     Engine/World.cpp
-    
+    Engine/GameStateMachine.cpp
+
     Engine/Animation/Animation.h
     Engine/Base/Character.h 
     Engine/Base/GameObject.h
@@ -31,12 +32,15 @@ set(ENGINE_SOURCES
     Engine/World.h
     Engine/Helpers.hpp
     Engine/Constants.h
+    Engine/GameStateMachine.h
+    Engine/TimersHolder.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${ENGINE_SOURCES})
 
 target_link_libraries(${UNIT_NAME} PUBLIC Primitives)
 target_include_directories(${UNIT_NAME} PUBLIC Engine)
+target_include_directories(${UNIT_NAME} PUBLIC nod/include)
 
 install(TARGETS ${UNIT_NAME}
     EXPORT ${UNIT_NAME}Targets

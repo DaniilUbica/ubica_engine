@@ -1,3 +1,7 @@
 [submodule "Primitives/Impls/SFMLBased/SFML"]
 	path = Primitives/Impls/SFMLBased/SFML
 	url = git@github.com:SFML/SFML.git
+
+[submodule "nod"]
+	path = nod
+	url = git@github.com:fr00b0/nod.git

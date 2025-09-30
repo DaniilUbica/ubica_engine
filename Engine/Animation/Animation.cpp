@@ -23,7 +23,7 @@ std::shared_ptr<primitives::Sprite> Animation::Tick(float time, bool rotate) {
         m_current_frame -= m_frames.size();
     }
 
-    int i = m_current_frame;
+    int i = static_cast<int>(m_current_frame);
     m_sprite->setTextureRect(m_frames[i]);
 
     if (!rotate) {
