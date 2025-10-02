@@ -34,7 +34,9 @@ void DrawableObject::drawAllDrawableObjects(game_engine::primitives::RenderWindo
     }
 
     for (const auto drawable : s_drawables) {
-        drawable->draw(window);
+        if (drawable->visible()) {
+            drawable->draw(window);
+        }
     }
 }
 
@@ -45,8 +47,18 @@ void DrawableObject::setZ(int z) {
     }
 }
 
+void DrawableObject::setVisible(bool visible) {
+    m_visible = visible;
+}
+
 SpriteObject::SpriteObject(const game_engine::primitives::Texture& texture) : DrawableObject(SPRITE_OBJECT_Z), TransformableObject() {
     m_texture = texture;
     m_sprite = std::make_shared<game_engine::primitives::Sprite>(m_texture);
     init(*m_sprite);
+}
+
+void SpriteObject::draw(const primitives::RenderWindow& window) {
+    if (m_sprite && m_visible) {
+        window.draw(*m_sprite);
+    }
 }

@@ -30,4 +30,6 @@ constexpr float MAX_ATTRACTION_SPEED    = 0.2f;
 constexpr float MIN_ATTRACTION_DISTANCE = 5.f;
 constexpr float MAX_ATTRACTION_DISTANCE = 250.f;
 
+constexpr int GAME_SCREEN_Z = 100;
+
 }

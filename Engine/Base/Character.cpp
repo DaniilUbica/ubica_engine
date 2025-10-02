@@ -1,7 +1,7 @@
 #include "Character.h"
 
 #include "Constants.h"
-#include "UI/DamageIndicator.h"
+#include "UI/UIComponents/DamageIndicator.h"
 
 using namespace game_engine;
 using namespace ui;

@@ -9,9 +9,11 @@ set(ENGINE_SOURCES
     Engine/Base/GameObject.cpp
     Engine/Base/DrawableObject.cpp
     Engine/Base/TransformableObject.cpp
-    Engine/UI/HealthBar.cpp
-    Engine/UI/DamageIndicator.cpp
+    Engine/UI/UIComponents/HealthBar.cpp
+    Engine/UI/UIComponents/DamageIndicator.cpp
+    Engine/UI/GameScreen/GameScreenManager.cpp
     Engine/Physics/ObjectsAttractionManager.cpp
+    Engine/UI/GameScreen/GameScreenBase.cpp
     Engine/Particles/ParticleSystem.cpp
     Engine/Base/Pickable.cpp 
     Engine/Core/Timer.cpp 
@@ -23,8 +25,10 @@ set(ENGINE_SOURCES
     Engine/Base/GameObject.h
     Engine/Base/DrawableObject.h
     Engine/Base/TransformableObject.h
-    Engine/UI/HealthBar.h
-    Engine/UI/DamageIndicator.h
+    Engine/UI/UIComponents/HealthBar.h
+    Engine/UI/UIComponents/DamageIndicator.h
+    Engine/UI/GameScreen/GameScreenManager.h
+    Engine/UI/GameScreen/GameScreenBase.h
     Engine/Physics/ObjectsAttractionManager.h
     Engine/Particles/ParticleSystem.h
     Engine/Base/Pickable.h 
