@@ -40,6 +40,10 @@ void DrawableObject::drawAllDrawableObjects(game_engine::primitives::RenderWindo
     }
 }
 
+void DrawableObject::deleteAllDrawableObjects() {
+    s_drawables.clear();
+}
+
 void DrawableObject::setZ(int z) {
     if (m_z != z) {
         m_z = z;

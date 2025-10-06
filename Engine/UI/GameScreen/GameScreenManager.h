@@ -17,6 +17,8 @@ class GameScreenManager {
 public:
     static std::shared_ptr<GameScreenManager> instance();
 
+    ~GameScreenManager();
+
     void addGameScreen(GameState state, game_screen_t screen);
 
     void onGameOver();

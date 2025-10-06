@@ -32,6 +32,10 @@ GameScreenManager::GameScreenManager() {
     }));
 }
 
+GameScreenManager::~GameScreenManager() {
+    m_gameScreens.clear();
+}
+
 void GameScreenManager::addGameScreen(GameState state, game_screen_t screen) { 
     m_gameScreens.insert(std::make_pair(state, std::move(screen)));
 }

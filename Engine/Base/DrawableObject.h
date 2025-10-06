@@ -61,6 +61,7 @@ public:
      * @endcode
      */
     static void drawAllDrawableObjects(game_engine::primitives::RenderWindow& window);
+    static void deleteAllDrawableObjects();
 
     void setZ(int z);
     void setVisible(bool visible);

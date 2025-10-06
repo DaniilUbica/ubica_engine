@@ -17,7 +17,7 @@ namespace game_engine {
  */
 class World : public DrawableObject {
 private:
-    static World*              m_world;
+    inline static std::weak_ptr<World> m_world;
 
     primitives::Texture                 m_border_texture;
     primitives::Texture                 m_background_texture;
@@ -31,9 +31,8 @@ private:
 public:
     World(World const& world) = delete;
     void operator=(World const&) = delete;
-    ~World();
 
-    static World* getWorld();
+    static std::shared_ptr<World> instance();
 
     /**
      * @brief Initializes the world with background and border textures.

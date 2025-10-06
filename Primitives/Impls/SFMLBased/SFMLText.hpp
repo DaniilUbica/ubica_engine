@@ -19,6 +19,7 @@ public:
     void setFillColor(const Color& color) { sf::Text::setFillColor(engineColorToSfColor(color)); };
 
     Vector2f getPosition() const { return sfVector2ToEngineVector2(sf::Text::getPosition()); };
+    FloatRect getLocalBounds() const { return sfRectToEngineRect(sf::Text::getLocalBounds()); };
 };
 
 }

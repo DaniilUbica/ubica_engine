@@ -6,8 +6,6 @@
 
 using namespace game_engine;
 
-ParticleSystem* ParticleSystem::m_instance = nullptr;
-
 Particle::Particle(primitives::Vector2f pos, primitives::Color& color) {
     m_shape.setPosition({ pos.x, pos.y });
 	m_shape.setRadius(PARTICLE_RADIUS);
@@ -29,16 +27,15 @@ void Particle::Update(float time) {
 	m_shape.setFillColor(color);
 }
 
-ParticleSystem::~ParticleSystem() {
-	m_instance = nullptr;
-}
+std::shared_ptr<ParticleSystem> ParticleSystem::instance() {
+    if (const auto sp = m_instance.lock()) {
+        return sp;
+    }
 
-ParticleSystem* ParticleSystem::instance() {
-	if (!m_instance) {
-		m_instance = new ParticleSystem();
-	}
+    const auto sp = std::shared_ptr<ParticleSystem>(new ParticleSystem());
+    m_instance = sp;
 
-	return m_instance;
+    return sp;
 }
 
 void ParticleSystem::Update(float time) {

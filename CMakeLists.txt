@@ -38,6 +38,7 @@ set(ENGINE_SOURCES
     Engine/Constants.h
     Engine/GameStateMachine.h
     Engine/TimersHolder.hpp
+    Engine/IGameManager.h
 )
 
 add_library(${UNIT_NAME} STATIC ${ENGINE_SOURCES})

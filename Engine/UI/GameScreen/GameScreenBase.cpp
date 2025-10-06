@@ -11,6 +11,7 @@ GameScreenBase::GameScreenBase() {
 GameScreenBase::~GameScreenBase() {}
 
 void GameScreenBase::showGameScreen() {
+    constructScreen();
     setAllObjectsVisible(true);
 }
 
@@ -19,7 +20,7 @@ void GameScreenBase::hideGameScreen() {
 }
 
 void GameScreenBase::addObject(drawable_t object) {
-    m_screenObjects.insert(std::make_pair(object, false));
+    m_screenObjects.push_back(std::make_pair(object, false));
 }
 
 void GameScreenBase::draw(const game_engine::primitives::RenderWindow& window) {

@@ -41,6 +41,14 @@ public:
         }
     }
 
+    static void stopAllTimers() {
+        for (auto& timer : m_timers) {
+            if (auto sp = timer.lock()) {
+                sp->Stop();
+            }
+        }
+    }
+
 private:
     inline static std::vector<weak_timer_t> m_timers;
 };

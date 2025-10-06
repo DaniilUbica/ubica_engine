@@ -52,7 +52,7 @@ public:
  */
 class ParticleSystem {
 private:
-    static ParticleSystem* m_instance;
+    inline static std::weak_ptr<ParticleSystem> m_instance;
     std::vector<Particle>  m_particles;
     
     ParticleSystem() = default;
@@ -60,9 +60,8 @@ private:
 public:
     ParticleSystem(const ParticleSystem&) = delete;
     void operator=(const ParticleSystem&) = delete;
-    ~ParticleSystem();
-    
-    static ParticleSystem* instance();
+
+    static std::shared_ptr<ParticleSystem> instance();
 
     /**
      * @brief Updates all particles in the system.

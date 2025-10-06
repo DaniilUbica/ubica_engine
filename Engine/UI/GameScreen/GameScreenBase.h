@@ -1,7 +1,5 @@
 #pragma once
 
-#include <map>
-
 #include "Base/DrawableObject.h"
 #include "RenderWindow/RenderWindow.hpp"
 
@@ -21,10 +19,12 @@ public:
     virtual void hideGameScreen();
     virtual void addObject(drawable_t object);
 
+    virtual void constructScreen() = 0;
+
 protected:
     void draw(const game_engine::primitives::RenderWindow& window);
 
-    std::map<drawable_t, bool /* visible */> m_screenObjects;
+    std::vector<std::pair<drawable_t, bool /* visible */>> m_screenObjects;
 
 private:
     void setAllObjectsVisible(bool visible);

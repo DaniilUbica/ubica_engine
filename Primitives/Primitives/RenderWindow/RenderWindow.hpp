@@ -23,7 +23,7 @@ public:
     bool isOpen() const { return m_impl->isOpen(); };
 
 private:
-    std::unique_ptr<IRenderWindow> m_impl;
+    std::shared_ptr<IRenderWindow> m_impl;
 };
 
 }
