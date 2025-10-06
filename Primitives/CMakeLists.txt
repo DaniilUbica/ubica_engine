@@ -74,6 +74,20 @@ if(USE_SFML)
     file(APPEND ${CMAKE_CURRENT_SOURCE_DIR}/Config.h "#define USE_SFML\n")
 endif()
 
+macro(GroupSources curdir)
+    file(GLOB children RELATIVE ${PROJECT_SOURCE_DIR}/${curdir} ${PROJECT_SOURCE_DIR}/${curdir}/*)
+    foreach(child ${children})
+        if(IS_DIRECTORY ${PROJECT_SOURCE_DIR}/${curdir}/${child})
+            GroupSources(${curdir}/${child})
+        else()
+            string(REPLACE "/" "\\" groupname ${curdir})
+            source_group(${groupname} FILES ${PROJECT_SOURCE_DIR}/${curdir}/${child})
+        endif()
+    endforeach()
+endmacro()
+
+GroupSources(ubica_engine/Primitives)
+
 install(TARGETS ${UNIT_NAME}
     EXPORT ${UNIT_NAME}Targets
     LIBRARY DESTINATION lib

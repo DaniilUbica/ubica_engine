@@ -47,6 +47,20 @@ target_link_libraries(${UNIT_NAME} PUBLIC Primitives)
 target_include_directories(${UNIT_NAME} PUBLIC Engine)
 target_include_directories(${UNIT_NAME} PUBLIC nod/include)
 
+macro(GroupSources curdir)
+    file(GLOB children RELATIVE ${PROJECT_SOURCE_DIR}/${curdir} ${PROJECT_SOURCE_DIR}/${curdir}/*)
+    foreach(child ${children})
+        if(IS_DIRECTORY ${PROJECT_SOURCE_DIR}/${curdir}/${child})
+            GroupSources(${curdir}/${child})
+        else()
+            string(REPLACE "/" "\\" groupname ${curdir})
+            source_group(${groupname} FILES ${PROJECT_SOURCE_DIR}/${curdir}/${child})
+        endif()
+    endforeach()
+endmacro()
+
+GroupSources(ubica_engine)
+
 install(TARGETS ${UNIT_NAME}
     EXPORT ${UNIT_NAME}Targets
     LIBRARY DESTINATION lib
