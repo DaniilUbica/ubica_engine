@@ -12,27 +12,9 @@ GameScreenBase::~GameScreenBase() {}
 
 void GameScreenBase::showGameScreen() {
     constructScreen();
-    setAllObjectsVisible(true);
+    setAllScreenObjectsVisible(true);
 }
 
 void GameScreenBase::hideGameScreen() {
-    setAllObjectsVisible(false);
-}
-
-void GameScreenBase::addObject(drawable_t object) {
-    m_screenObjects.push_back(std::make_pair(object, false));
-}
-
-void GameScreenBase::draw(const game_engine::primitives::RenderWindow& window) {
-    for (const auto& pair : m_screenObjects) {
-        if (pair.second) {
-            window.draw(*pair.first);
-        }
-    }
-}
-
-void GameScreenBase::setAllObjectsVisible(bool visible) {
-    for (auto& pair : m_screenObjects) {
-        pair.second = visible;
-    }
+    setAllScreenObjectsVisible(false);
 }
