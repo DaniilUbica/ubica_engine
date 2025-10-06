@@ -15,6 +15,7 @@ public:
     virtual void setFillColor(const Color& color) = 0;
 
     virtual Vector2f getPosition() const = 0;
+    virtual FloatRect getLocalBounds() const = 0;
 };
 
 }

@@ -20,7 +20,7 @@ std::shared_ptr<primitives::Sprite> Animation::Tick(float time, bool rotate) {
     m_current_frame += m_animation_speed * time;
 
     if (m_current_frame >= float(m_frames.size())) {
-        m_current_frame -= m_frames.size();
+        m_current_frame = 0;
     }
 
     int i = static_cast<int>(m_current_frame);

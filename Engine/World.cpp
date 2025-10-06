@@ -3,8 +3,6 @@
 
 using namespace game_engine;
 
-World* World::m_world = nullptr;
-
 void World::draw(const primitives::RenderWindow& window) {
     window.draw(*m_background_sprite);
     for (const auto& sprite : m_border_sprites) {
@@ -12,16 +10,15 @@ void World::draw(const primitives::RenderWindow& window) {
     }
 }
 
-World::~World() {
-    m_world = nullptr;
-}
-
-World* World::getWorld() {
-    if (!m_world) {
-        m_world = new World();
+std::shared_ptr<World> World::instance() {
+    if (const auto sp = m_world.lock()) {
+        return sp;
     }
 
-    return m_world;
+    const auto sp = std::shared_ptr<World>(new World());
+    m_world = sp;
+
+    return sp;
 }
 
 void World::initWorld(const primitives::Texture& background, const primitives::Texture& border) {

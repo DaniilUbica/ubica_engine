@@ -24,6 +24,7 @@ private:
     primitives::Vector2f       m_pos;
     primitives::Vector2f       m_size;
     primitives::Vector2f       m_parent_size;
+    
     float              m_health;
     float              m_chunk_size;
     float              m_border_size = 2.0;

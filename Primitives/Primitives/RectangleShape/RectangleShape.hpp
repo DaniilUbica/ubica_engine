@@ -10,6 +10,8 @@ namespace primitives {
 class RectangleShape : public Drawable {
 public:
     RectangleShape() : m_impl(createRectangleShape()) {};
+    RectangleShape(const Vector2f& pos, const Vector2f& size) : m_impl(createRectangleShape()) { setPosition(pos); setSize(size); };
+    RectangleShape(const FloatRect& bounds) : m_impl(createRectangleShape()) { setPosition(bounds.getPosition()); setSize(bounds.getSize()); };
 
     void move(const Vector2f& pos) {};
 

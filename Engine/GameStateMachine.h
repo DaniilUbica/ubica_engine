@@ -24,7 +24,9 @@ public:
     nod::signal<void()> fireGameStarted;
     nod::signal<void()> fireGameResumed;
     nod::signal<void()> fireGamePaused;
+    nod::signal<void()> fireGameRestarted;
     nod::signal<void()> fireGameOver;
+    nod::signal<void()> fireShowMainMenu;
 
 private:
     GameStateMachine();

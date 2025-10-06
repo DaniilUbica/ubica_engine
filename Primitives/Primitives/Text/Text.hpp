@@ -21,6 +21,7 @@ public:
     void setFillColor(const Color& color) { m_impl->setFillColor(color); };
 
     [[nodiscard]] Vector2f getPosition() const { return m_impl->getPosition(); };
+    [[nodiscard]] FloatRect getLocalBounds() const { return m_impl->getLocalBounds(); };
 
     void draw(const RenderWindow& window) override { window.draw(*this); };
 

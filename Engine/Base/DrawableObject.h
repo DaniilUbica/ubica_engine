@@ -26,6 +26,7 @@ private:
 
 protected:
     int m_z = 0;
+    bool m_visible = true;
 
 public:
 
@@ -60,10 +61,13 @@ public:
      * @endcode
      */
     static void drawAllDrawableObjects(game_engine::primitives::RenderWindow& window);
+    static void deleteAllDrawableObjects();
 
     void setZ(int z);
-    
+    void setVisible(bool visible);
+
     int z() const { return m_z; };
+    bool visible() const { return m_visible; };
 };
 
 /**
@@ -88,11 +92,7 @@ public:
      * @brief Automatic drawing implementation for sprite-based objects.
      * Derived classes don't need to override this method.
      */
-    void draw(const primitives::RenderWindow& window) override final {
-        if (m_sprite) {
-            window.draw(*m_sprite);
-        }
-    }
+    void draw(const primitives::RenderWindow& window) override final;
 
     std::shared_ptr<game_engine::primitives::Sprite> getSprite() const { return m_sprite; };
 

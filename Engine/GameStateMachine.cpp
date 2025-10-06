@@ -23,13 +23,19 @@ void GameStateMachine::setState(GameState newState) {
 
     switch (m_currentState) {
         case GameState::MAIN_MENU:
+            if (m_prevState != GameState::MAIN_MENU) {
+                fireShowMainMenu();
+            }
             break;
         case GameState::RUNNING:
-            if (m_prevState != GameState::RUNNING && m_prevState == GameState::MAIN_MENU) {
+            if (m_prevState == GameState::MAIN_MENU) {
                 fireGameStarted();
             }
-            else if (m_prevState != GameState::RUNNING && m_prevState == GameState::PAUSED) {
+            else if (m_prevState == GameState::PAUSED) {
                 fireGameResumed();
+            }
+            else if (m_prevState == GameState::GAME_OVER) {
+                fireGameRestarted();
             }
             break;
         case GameState::PAUSED:
