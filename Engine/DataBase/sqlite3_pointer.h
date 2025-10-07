@@ -11,7 +11,7 @@ namespace database {
 int sqlite3_close(sqlite3*);
 int sqlite3_finalize(sqlite3_stmt*);
 
-template<class T>
+template<typename T>
 constexpr inline void(*release)(T*);
 
 template<>
@@ -19,7 +19,7 @@ constexpr inline auto release<sqlite3> = sqlite3_close;
 template<>
 constexpr inline auto release<sqlite3_stmt> = sqlite3_finalize;
 
-template<class T> struct deleter {
+template<typename T> struct deleter {
     void operator()(T target) const {
         return release<T>(target);
     }
