@@ -20,6 +20,7 @@ public:
     ~GameScreenManager();
 
     void addGameScreen(GameState state, game_screen_t screen);
+    void Update(float time);
 
     void onGameOver();
     void onGameStarted();

@@ -2,6 +2,7 @@
 
 #include "Constants.h"
 
+using namespace game_engine;
 using namespace game_engine::ui;
 
 GameScreenBase::GameScreenBase() {
@@ -17,4 +18,16 @@ void GameScreenBase::showGameScreen() {
 
 void GameScreenBase::hideGameScreen() {
     setAllScreenObjectsVisible(false);
+}
+
+void GameScreenBase::setAllScreenObjectsVisible(bool visible) {
+    for (auto& pair : m_primitivesDrawableObjects) {
+        pair.second = visible;
+    }
+}
+
+void GameScreenBase::draw(const primitives::RenderWindow& window) {
+    for (auto& pair : m_primitivesDrawableObjects) {
+        pair.first->draw(window);
+    }
 }
