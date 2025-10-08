@@ -2,6 +2,8 @@
 
 #include "Constants.h"
 
+#include <algorithm>
+
 using namespace game_engine;
 
 std::vector<DrawableObject*> DrawableObject::s_drawables = {};
