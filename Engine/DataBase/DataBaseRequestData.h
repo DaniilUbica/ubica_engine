@@ -2,6 +2,7 @@
 
 #include <map>
 #include <vector>
+#include <variant>
 #include <type_traits>
 #include <concepts>
 
@@ -18,6 +19,17 @@ concept SQLiteCompatible = std::is_same_v<T, int> ||
                           std::is_same_v<T, long long> ||
                           std::is_same_v<T, float>;
 
+using SQLiteValueVariant = std::variant<
+    int,
+    double,
+    std::string,
+    const char*,
+    std::nullptr_t,
+    long,
+    long long,
+    float
+>;
+
 enum class DBRequestType {
     NONE = -1,
     CREATE_RELATION = 0,
@@ -29,7 +41,6 @@ enum class DBRequestType {
 struct DBRequestData {
     inline static std::string databaseName = "";
     inline static std::string relationName = "";
-    DBRequestType type = DBRequestType::NONE;
 
     virtual ~DBRequestData() {};
 };
@@ -39,18 +50,24 @@ struct DBCreateRelationData : DBRequestData {
 };
 
 template<SQLiteCompatible FieldType>
-struct DBInsertData : DBRequestData {
-    std::string fieldName;
+struct DBSingleInsertData : DBRequestData {
+    std::string attributeName;
     FieldType value;
 };
 
+struct DBMultiInsertData : DBRequestData {
+    std::vector<std::string> attributesNames;
+    std::vector<SQLiteValueVariant> values;
+};
+
 struct DBSingleSelectData : DBRequestData {
-    std::string fieldToSelect;
-    std::string whereClause = "";
+    std::string attributeToSelect;
+    std::string whereAttributeName = "";
+    std::string whereAttributeValue = "";
 };
 
 struct DBMultiSelectData : DBRequestData {
-    std::vector<std::string> fieldsToSelect;
+    std::vector<std::string> attributesToSelect;
     std::string whereClause = "";
     bool selectAll = false;
 };

@@ -20,7 +20,7 @@ constexpr inline auto release<sqlite3_stmt> = sqlite3_finalize;
 template<typename T>
 struct deleter {
     void operator()(T* target) const {
-        return release<T>(target);
+        release<T>(target);
     }
 };
 

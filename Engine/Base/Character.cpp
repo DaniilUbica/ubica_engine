@@ -8,7 +8,7 @@ using namespace ui;
 
 void Character::createDamageIndicator(int damage) {
     const auto pos = m_pos + m_size / 2.f - static_cast<float>(FONT_SIZE / 2);
-//    DamageIndicatorsHolder::addIndicator(pos, damage, DAMAGE_INDICATOR_SPEED, damage_indicator::Direction::FROM_BOTTOM_TO_TOP, FONT, FONT_SIZE, primitives::colors::Black, primitives::colors::White, std::dynamic_pointer_cast<DrawableObject>(shared_from_this()));
+    DamageIndicatorsHolder::addIndicator(pos, damage, DAMAGE_INDICATOR_SPEED, damage_indicator::Direction::FROM_BOTTOM_TO_TOP, FONT, FONT_SIZE, primitives::colors::Black, primitives::colors::White, std::dynamic_pointer_cast<DrawableObject>(shared_from_this()));
 }
 
 Character::Character(const game_engine::primitives::Texture& texture) : SpriteObject(texture) {}

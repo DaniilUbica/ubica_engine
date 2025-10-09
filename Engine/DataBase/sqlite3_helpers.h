@@ -5,6 +5,12 @@
 namespace game_engine {
 namespace database {
 
+template<SQLiteCompatible FieldType>
+void bindValue(sqlite3_stmt* stmt, int index, const FieldType& value);
+
+template<SQLiteCompatible FieldType>
+FieldType extractValue(sqlite3_stmt* stmt, int column);
+
 namespace {
     void bindValueImpl(sqlite3_stmt* stmt, int index, int value) {
         sqlite3_bind_int64(stmt, index, static_cast<sqlite3_int64>(value));
@@ -77,7 +83,7 @@ void bindValue(sqlite3_stmt* stmt, int index, const FieldType& value) {
 
 template<SQLiteCompatible FieldType>
 FieldType extractValue(sqlite3_stmt* stmt, int column) {
-    return extractValueImpl(stmt, column, FieldType{});
+    return extractValueImpl(stmt, column, FieldType());
 }
 
 }

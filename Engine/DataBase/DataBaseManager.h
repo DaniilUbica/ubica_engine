@@ -13,6 +13,12 @@
 namespace game_engine {
 namespace database {
 
+namespace {
+    using multi_select_return_t = std::optional<std::map<std::string, SQLiteValueVariant>>;
+}
+
+const std::string UNSUPPORTED_TYPE = "UNSUPPORTED_TYPE";
+
 class DataBaseManager {
 public:
     DataBaseManager();
@@ -22,24 +28,29 @@ public:
     [[nodiscard]] bool createRelation(const DBCreateRelationData& data);
 
     template<SQLiteCompatible FieldType>
-    [[nodiscard]] bool insertValue(const DBInsertData<FieldType>& data);
+    [[nodiscard]] bool insertValue(const DBSingleInsertData<FieldType>& data);
+    [[nodiscard]] bool insertValues(const DBMultiInsertData& data);
 
     template<SQLiteCompatible FieldType>
     [[nodiscard]] std::optional<FieldType> getValue(const DBSingleSelectData& data);
-
-    [[nodiscard]] std::map<std::string, std::string> getValues(const DBMultiSelectData& data);
+    [[nodiscard]] multi_select_return_t getValues(const DBMultiSelectData& data);
 
 private:
     sqlite3_pointer<sqlite3> m_db;
 };
 
 template<SQLiteCompatible FieldType>
-[[nodiscard]] bool DataBaseManager::insertValue(const DBInsertData<FieldType>& data) {
+[[nodiscard]] bool DataBaseManager::insertValue(const DBSingleInsertData<FieldType>& data) {
     if (data.relationName.empty() || data.databaseName.empty()) {
         return false;
     }
 
-    std::string sql_request = "INSERT OR REPLACE INTO " + data.relationName + " (" + data.fieldName + ") VALUES (?);";
+    std::string sql_request = "INSERT OR REPLACE INTO " + data.relationName + " (" + data.attributeName + ") VALUES (?);";
+    if (!data.whereAttributeName.empty() && !data.whereAttributeValue.empty()) {
+        sql_request += " WHERE " + data.whereAttributeName + " = '" + data.whereAttributeValue + '\'';
+    }
+    sql_request += ';';
+
     sqlite3_pointer<sqlite3_stmt> stmt;
     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
     if (rc != SQLITE_OK) {
@@ -58,11 +69,11 @@ template<SQLiteCompatible FieldType>
         return result;
     }
 
-    std::string sql_request = "SELECT " + data.fieldToSelect + " FROM " + data.relationName;
-    if (!data.whereClause.empty()) {
-        sql_request += " WHERE " + data.whereClause;
+    std::string sql_request = "SELECT " + data.attributeToSelect + " FROM " + data.relationName;
+    if (!data.whereAttributeName.empty() && !data.whereAttributeValue.empty()) {
+        sql_request += " WHERE " + data.whereAttributeName + " = '" + data.whereAttributeValue + '\'';
     }
-    sql_request += " LIMIT 1;";
+    sql_request += ';';
 
     sqlite3_pointer<sqlite3_stmt> stmt;
     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
