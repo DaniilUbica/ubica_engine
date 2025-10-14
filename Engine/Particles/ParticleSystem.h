@@ -5,6 +5,8 @@
 #include "Primitives/Texture/Texture.hpp"
 #include "Primitives/Vector2.hpp"
 
+#include "cpplib/singletone.hpp"
+
 namespace game_engine {
 
 /**
@@ -50,19 +52,11 @@ public:
  * particles. It implements the singleton pattern to ensure only one instance
  * exists throughout the game.
  */
-class ParticleSystem {
+class ParticleSystem : public game_engine::cpplib::singletone_from_this<ParticleSystem> {
 private:
-    inline static std::weak_ptr<ParticleSystem> m_instance;
     std::vector<Particle>  m_particles;
-    
-    ParticleSystem() = default;
-    
+
 public:
-    ParticleSystem(const ParticleSystem&) = delete;
-    void operator=(const ParticleSystem&) = delete;
-
-    static std::shared_ptr<ParticleSystem> instance();
-
     /**
      * @brief Updates all particles in the system.
      * @param time Elapsed time since the last update

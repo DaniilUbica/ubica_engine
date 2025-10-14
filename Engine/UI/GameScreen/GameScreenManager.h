@@ -3,6 +3,8 @@
 #include <map>
 #include <list>
 
+#include "cpplib/singletone.hpp"
+
 #include "GameStateMachine.h"
 #include "GameScreenBase.h"
 
@@ -13,10 +15,10 @@ namespace {
     using game_screen_t = std::unique_ptr<GameScreenBase>;
 }
 
-class GameScreenManager {
-public:
-    static std::shared_ptr<GameScreenManager> instance();
+class GameScreenManager : public cpplib::singletone_from_this<GameScreenManager> {
+    friend class singletone_from_this<GameScreenManager>;
 
+public:
     ~GameScreenManager();
 
     void addGameScreen(GameState state, game_screen_t screen);
@@ -30,12 +32,8 @@ public:
 
 private:
     GameScreenManager();
-    GameScreenManager(const GameScreenManager&) = delete;
-    void operator=(const GameScreenManager&) = delete;
 
     void hideAllGameScreens();
-
-    inline static std::weak_ptr<GameScreenManager> s_instance;
 
     std::map<GameState, game_screen_t> m_gameScreens;
     std::list<nod::scoped_connection> m_stateMachineConnections;

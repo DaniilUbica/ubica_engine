@@ -5,6 +5,8 @@
 #include "Primitives/Texture/Texture.hpp"
 #include "Primitives/Sprite/Sprite.hpp"
 
+#include "cpplib/singletone.hpp"
+
 namespace game_engine {
 
 /**
@@ -15,25 +17,16 @@ namespace game_engine {
  * the game world's background and border elements. It implements the singleton
  * pattern to ensure only one world instance exists throughout the game.
  */
-class World : public DrawableObject {
+class World : public DrawableObject, public cpplib::singletone_from_this<World> {
 private:
-    inline static std::weak_ptr<World> m_world;
-
     primitives::Texture                 m_border_texture;
     primitives::Texture                 m_background_texture;
     std::shared_ptr<primitives::Sprite> m_background_sprite;
     std::vector<primitives::Sprite>     m_border_sprites;
 
-    World() {};
-
     void draw(const primitives::RenderWindow& window) override;
 
 public:
-    World(World const& world) = delete;
-    void operator=(World const&) = delete;
-
-    static std::shared_ptr<World> instance();
-
     /**
      * @brief Initializes the world with background and border textures.
      * @param background Texture to use for the world background

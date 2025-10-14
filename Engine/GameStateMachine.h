@@ -2,6 +2,8 @@
 
 #include "nod/nod.hpp"
 
+#include "cpplib/singletone.hpp"
+
 namespace game_engine {
 
 enum class GameState {
@@ -11,11 +13,10 @@ enum class GameState {
     GAME_OVER
 };
 
-class GameStateMachine {
+class GameStateMachine : public game_engine::cpplib::singletone_from_this<GameStateMachine> {
+    friend class singletone_from_this<GameStateMachine>;
 public:
     ~GameStateMachine();
-    
-    static std::shared_ptr<GameStateMachine> instance();
 
     void setState(GameState newState);
 
@@ -30,10 +31,6 @@ public:
 
 private:
     GameStateMachine();
-    GameStateMachine(const GameStateMachine&) = delete;
-    void operator=(const GameStateMachine&) = delete;
-
-    inline static std::weak_ptr<GameStateMachine> s_instance;
 
     GameState m_currentState = GameState::MAIN_MENU;
     GameState m_prevState    = GameState::MAIN_MENU;

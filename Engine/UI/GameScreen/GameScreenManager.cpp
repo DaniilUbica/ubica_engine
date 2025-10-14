@@ -3,17 +3,6 @@
 using namespace game_engine;
 using namespace ui;
 
-std::shared_ptr<GameScreenManager> GameScreenManager::instance() {
-    if (const auto sp = s_instance.lock()) {
-        return sp;
-    }
-
-    const auto sp = std::shared_ptr<GameScreenManager>(new GameScreenManager());
-    s_instance = sp;
-
-    return sp;
-}
-
 GameScreenManager::GameScreenManager() {
     m_stateMachineConnections.push_back(GameStateMachine::instance()->fireGameOver.connect([this]() {
         onGameOver();
