@@ -9,7 +9,7 @@ DataBaseManager::DataBaseManager() {}
 DataBaseManager::~DataBaseManager() {}
 
 bool DataBaseManager::openDatabase(const std::string& dbName) {
-    const auto rc = sqlite3_open(dbName.c_str(), std::out_ptr(m_db));
+    const auto rc = sqlite3_open(dbName.c_str(), cpplib::out_ptr(m_db));
     if (rc) {
         return false;
     }
@@ -76,7 +76,7 @@ bool DataBaseManager::insertValues(const DBMultiInsertData& data) {
      sql_request += ");";
 
      sqlite3_pointer<sqlite3_stmt> stmt;
-     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
+     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, cpplib::out_ptr(stmt), nullptr);
      if (rc != SQLITE_OK) {
          assert(false);
          return false;
@@ -115,7 +115,7 @@ multi_select_return_t DataBaseManager::getValues(const DBMultiSelectData& data) 
     sql_request += " FROM " + data.relationName + (data.whereClause.empty() ? "" : data.whereClause) + ';';
 
     sqlite3_pointer<sqlite3_stmt> stmt;
-    const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
+    const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, cpplib::out_ptr(stmt), nullptr);
 
     if (rc != SQLITE_OK) {
         assert(false);

@@ -12,6 +12,8 @@
 #include "sqlite3_pointer.h"
 #include "sqlite3_helpers.h"
 
+#include "cpplib/out_ptr.hpp"
+
 namespace game_engine {
 namespace database {
 
@@ -55,7 +57,7 @@ template<SQLiteCompatible FieldType>
     sql_request += ';';
 
     sqlite3_pointer<sqlite3_stmt> stmt;
-    const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
+    const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, cpplib::out_ptr(stmt), nullptr);
     if (rc != SQLITE_OK) {
         assert(false);
         return false;
@@ -81,7 +83,7 @@ template<SQLiteCompatible FieldType>
     sql_request += ';';
 
     sqlite3_pointer<sqlite3_stmt> stmt;
-    const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
+    const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, cpplib::out_ptr(stmt), nullptr);
 
     if (rc != SQLITE_OK) {
         assert(false);
