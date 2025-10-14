@@ -52,20 +52,25 @@ bool DataBaseManager::createRelation(const DBCreateRelationData& data) {
 
 bool DataBaseManager::insertValues(const DBMultiInsertData& data) {
     if (data.relationName.empty() || data.databaseName.empty() || data.values.size() != data.attributesNames.size()) {
+        assert(false);
         return false;
     }
 
     std::string sql_request = "INSERT OR REPLACE INTO " + data.relationName + " (";
 
-     for (size_t i = 0; i < data.attributesNames.size(); ++i) {
-         if (i > 0) sql_request += ", ";
+     for (int i = 0; i < data.attributesNames.size(); ++i) {
+         if (i > 0) {
+             sql_request += ", ";
+         }
          sql_request += data.attributesNames[i];
      }
 
      sql_request += ") VALUES (";
 
-     for (size_t i = 0; i < data.values.size(); ++i) {
-         if (i > 0) sql_request += ", ";
+     for (int i = 0; i < data.values.size(); ++i) {
+         if (i > 0) {
+             sql_request += ", ";
+         }
          sql_request += "?";
      }
      sql_request += ");";
@@ -73,6 +78,7 @@ bool DataBaseManager::insertValues(const DBMultiInsertData& data) {
      sqlite3_pointer<sqlite3_stmt> stmt;
      const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
      if (rc != SQLITE_OK) {
+         assert(false);
          return false;
      }
 
@@ -88,6 +94,7 @@ bool DataBaseManager::insertValues(const DBMultiInsertData& data) {
 multi_select_return_t DataBaseManager::getValues(const DBMultiSelectData& data) {
     multi_select_return_t result = std::nullopt;
     if (data.relationName.empty() || data.databaseName.empty() || (data.attributesToSelect.empty() && !data.selectAll)) {
+        assert(false);
         return result;
     }
 
@@ -111,6 +118,7 @@ multi_select_return_t DataBaseManager::getValues(const DBMultiSelectData& data) 
     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
 
     if (rc != SQLITE_OK) {
+        assert(false);
         return result;
     }
 

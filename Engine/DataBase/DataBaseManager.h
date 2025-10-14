@@ -3,7 +3,9 @@
 #include <sqlite3.h>
 
 #include <map>
+#include <memory>
 #include <optional>
+#include <cassert>
 
 #include "DataBaseRequestData.h"
 
@@ -42,6 +44,7 @@ private:
 template<SQLiteCompatible FieldType>
 [[nodiscard]] bool DataBaseManager::insertValue(const DBSingleInsertData<FieldType>& data) {
     if (data.relationName.empty() || data.databaseName.empty()) {
+        assert(false);
         return false;
     }
 
@@ -54,6 +57,7 @@ template<SQLiteCompatible FieldType>
     sqlite3_pointer<sqlite3_stmt> stmt;
     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
     if (rc != SQLITE_OK) {
+        assert(false);
         return false;
     }
 
@@ -66,6 +70,7 @@ template<SQLiteCompatible FieldType>
 [[nodiscard]] std::optional<FieldType> DataBaseManager::getValue(const DBSingleSelectData& data) {
     std::optional<FieldType> result = std::nullopt;
     if (std::is_same_v<FieldType, std::nullptr_t> || data.databaseName.empty() || data.relationName.empty()) {
+        assert(false);
         return result;
     }
 
@@ -79,6 +84,7 @@ template<SQLiteCompatible FieldType>
     const auto rc = sqlite3_prepare_v2(m_db.get(), sql_request.c_str(), -1, std::out_ptr(stmt), nullptr);
 
     if (rc != SQLITE_OK) {
+        assert(false);
         return result;
     }
 
