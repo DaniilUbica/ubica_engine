@@ -9,6 +9,7 @@ set(ENGINE_SOURCES
     Engine/Base/GameObject.cpp
     Engine/Base/DrawableObject.cpp
     Engine/Base/TransformableObject.cpp
+    Engine/DataBase/DataBaseManager.cpp
     Engine/UI/UIComponents/HealthBar.cpp
     Engine/UI/UIComponents/DamageIndicator.cpp
     Engine/UI/GameScreen/GameScreenManager.cpp
@@ -25,6 +26,10 @@ set(ENGINE_SOURCES
     Engine/Base/GameObject.h
     Engine/Base/DrawableObject.h
     Engine/Base/TransformableObject.h
+    Engine/DataBase/DataBaseManager.h
+    Engine/DataBase/DataBaseRequestData.h
+    Engine/DataBase/sqlite3_pointer.h
+    Engine/DataBase/sqlite3_helpers.h
     Engine/UI/UIComponents/HealthBar.h
     Engine/UI/UIComponents/DamageIndicator.h
     Engine/UI/GameScreen/GameScreenManager.h
@@ -39,13 +44,18 @@ set(ENGINE_SOURCES
     Engine/GameStateMachine.h
     Engine/TimersHolder.hpp
     Engine/IGameManager.h
+
+    cpplib/out_ptr.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${ENGINE_SOURCES})
 
-target_link_libraries(${UNIT_NAME} PUBLIC Primitives)
+find_package(SQLite3 REQUIRED)
+
+target_link_libraries(${UNIT_NAME} PUBLIC Primitives SQLite::SQLite3)
 target_include_directories(${UNIT_NAME} PUBLIC Engine)
 target_include_directories(${UNIT_NAME} PUBLIC nod/include)
+target_include_directories(${UNIT_NAME} PUBLIC .)
 
 macro(GroupSources curdir)
     file(GLOB children RELATIVE ${PROJECT_SOURCE_DIR}/${curdir} ${PROJECT_SOURCE_DIR}/${curdir}/*)

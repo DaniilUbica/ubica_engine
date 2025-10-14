@@ -14,28 +14,6 @@ namespace damage_indicator {
     };
 }
 
-class DamageIndicator;
-
-namespace {
-    using indicator_t = std::unique_ptr<DamageIndicator>;
-}
-
-class DamageIndicatorsHolder {
-private:
-    static std::vector<indicator_t> m_indicators;
-
-    DamageIndicatorsHolder() = default;
-
-public:
-    DamageIndicatorsHolder(const DamageIndicatorsHolder&) = delete;
-    void operator=(const DamageIndicatorsHolder&) = delete;
-
-    static void Update(float time);
-    static void addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, unsigned int size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
-
-    static void deleteAllIndicators() { m_indicators.clear(); };
-};
-
 class DamageIndicator : public DrawableObject {
 private:
     int m_damage = 0;
@@ -63,6 +41,26 @@ public:
     void Update(float time);
 
     bool stopped() const { return m_stopped; };
+};
+
+namespace {
+    using indicator_t = std::unique_ptr<DamageIndicator>;
+}
+
+class DamageIndicatorsHolder {
+private:
+    static std::vector<indicator_t> m_indicators;
+
+    DamageIndicatorsHolder() = default;
+
+public:
+    DamageIndicatorsHolder(const DamageIndicatorsHolder&) = delete;
+    void operator=(const DamageIndicatorsHolder&) = delete;
+
+    static void Update(float time);
+    static void addIndicator(const primitives::Vector2f& pos, int damage, float speed, damage_indicator::Direction direction, const primitives::Font& font, unsigned int size, const primitives::Color& borderColor, const primitives::Color& textColor, std::weak_ptr<DrawableObject> parent);
+
+    static void deleteAllIndicators() { m_indicators.clear(); };
 };
 
 }

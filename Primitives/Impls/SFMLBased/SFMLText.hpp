@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Text/IText.h"
+#include "Font/IFont.h"
 #include "Helpers.hpp"
 
 #include <SFML/Graphics.hpp>
