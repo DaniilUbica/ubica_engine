@@ -10,17 +10,6 @@ void World::draw(const primitives::RenderWindow& window) {
     }
 }
 
-std::shared_ptr<World> World::instance() {
-    if (const auto sp = m_world.lock()) {
-        return sp;
-    }
-
-    const auto sp = std::shared_ptr<World>(new World());
-    m_world = sp;
-
-    return sp;
-}
-
 void World::initWorld(const primitives::Texture& background, const primitives::Texture& border) {
     m_background_texture = background;
     m_border_texture = border;

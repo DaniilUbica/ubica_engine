@@ -46,6 +46,7 @@ set(ENGINE_SOURCES
     Engine/IGameManager.h
 
     cpplib/out_ptr.hpp
+    cpplib/singletone.hpp
 )
 
 add_library(${UNIT_NAME} STATIC ${ENGINE_SOURCES})
@@ -55,7 +56,7 @@ find_package(SQLite3 REQUIRED)
 target_link_libraries(${UNIT_NAME} PUBLIC Primitives SQLite::SQLite3)
 target_include_directories(${UNIT_NAME} PUBLIC Engine)
 target_include_directories(${UNIT_NAME} PUBLIC nod/include)
-target_include_directories(${UNIT_NAME} PUBLIC .)
+target_include_directories(${UNIT_NAME} PRIVATE .)
 
 macro(GroupSources curdir)
     file(GLOB children RELATIVE ${PROJECT_SOURCE_DIR}/${curdir} ${PROJECT_SOURCE_DIR}/${curdir}/*)

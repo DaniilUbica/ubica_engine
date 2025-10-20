@@ -27,17 +27,6 @@ void Particle::Update(float time) {
 	m_shape.setFillColor(color);
 }
 
-std::shared_ptr<ParticleSystem> ParticleSystem::instance() {
-    if (const auto sp = m_instance.lock()) {
-        return sp;
-    }
-
-    const auto sp = std::shared_ptr<ParticleSystem>(new ParticleSystem());
-    m_instance = sp;
-
-    return sp;
-}
-
 void ParticleSystem::Update(float time) {
     for (auto& particle : m_particles) {
         particle.Update(time);

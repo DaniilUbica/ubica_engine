@@ -2,17 +2,6 @@
 
 using namespace game_engine;
 
-std::shared_ptr<GameStateMachine> GameStateMachine::instance() {
-    if (const auto sp = s_instance.lock()) {
-        return sp;
-    }
-
-    const auto sp = std::shared_ptr<GameStateMachine>(new GameStateMachine());
-    s_instance = sp;
-
-    return sp;
-}
-
 GameStateMachine::GameStateMachine() {}
 
 GameStateMachine::~GameStateMachine() {}
