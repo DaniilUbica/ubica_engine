@@ -32,4 +32,6 @@ constexpr float MAX_ATTRACTION_DISTANCE = 250.f;
 
 constexpr int GAME_SCREEN_Z = 100;
 
+constexpr float HEALTH_BAR_ANIMATION_SPEED = 0.01f;
+
 }

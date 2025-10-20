@@ -1,5 +1,7 @@
 #include "HealthBar.h"
 
+#include "Constants.h"
+
 using namespace game_engine;
 using namespace ui;
 
@@ -51,13 +53,34 @@ void HealthBar::Update(float health, primitives::Vector2f pos) {
         m_health_bar.setPosition(m_pos);
     }
 
-    primitives::Vector2f new_size;
-    if (health > 0) {
-        new_size = primitives::Vector2f(m_chunk_size * health, m_size.y);
-    }
-    else {
-        new_size = primitives::Vector2f(0.0, m_size.y);
+    static float prevHealthValue = m_health;
+    static bool isAnimating = false;
+
+    primitives::Vector2f new_size = m_health_bar.getSize();
+    const auto target_width = m_chunk_size * health;
+
+    if (prevHealthValue != health) {
+        isAnimating = true;
     }
 
+    if (isAnimating) {
+        const auto animationDirection = (target_width > new_size.x) ? 1 : -1;
+        new_size.x += animationDirection * HEALTH_BAR_ANIMATION_SPEED;
+
+        if ((animationDirection > 0 && new_size.x >= target_width) || (animationDirection < 0 && new_size.x <= target_width)) {
+            new_size.x = target_width;
+            isAnimating = false;
+            prevHealthValue = health;
+        }
+    }
+    else {
+        new_size = primitives::Vector2f(target_width, m_size.y);
+    }
+
+    if (new_size.x < 0) {
+        new_size.x = 0;
+    }
+
+    m_health = health;
     m_health_bar.setSize(new_size);
 }
