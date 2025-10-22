@@ -63,7 +63,7 @@ void HealthBar::Update(float health, primitives::Vector2f pos) {
         isAnimating = true;
     }
 
-    if (isAnimating) {
+    if (isAnimating && health > 0) {
         const auto animationDirection = (target_width > new_size.x) ? 1 : -1;
         new_size.x += animationDirection * HEALTH_BAR_ANIMATION_SPEED;
 
