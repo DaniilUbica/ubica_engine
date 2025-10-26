@@ -15,10 +15,9 @@ namespace {
     using game_screen_t = std::unique_ptr<GameScreenBase>;
 }
 
-class GameScreenManager : public cpplib::singletone_from_this<GameScreenManager> {
-    friend class singletone_from_this<GameScreenManager>;
-
+class GameScreenManager {
 public:
+    GameScreenManager(std::shared_ptr<GameStateMachine> stateMachine);
     ~GameScreenManager();
 
     void addGameScreen(GameState state, game_screen_t screen);
@@ -31,10 +30,10 @@ public:
     void onShowMainMenu();
 
 private:
-    GameScreenManager();
 
     void hideAllGameScreens();
 
+    std::shared_ptr<GameStateMachine> m_stateMachine;
     std::map<GameState, game_screen_t> m_gameScreens;
     std::list<nod::scoped_connection> m_stateMachineConnections;
 };

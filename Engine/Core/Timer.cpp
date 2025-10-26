@@ -2,126 +2,93 @@
 
 using namespace game_engine;
 
-void Timer::runTimer() {
-    std::unique_lock<std::mutex> lock(m_mutex);
+Timer::Timer(float time) : m_targetTime(time) {}
 
-    auto startTime = std::chrono::steady_clock::now();
-    auto targetDuration = std::chrono::milliseconds(static_cast<int>(m_remainingTime * 1000));
+void Timer::Start() { 
+    if (!m_isRunning && !m_isFinished) {
+        Restart();
+    }
+}
 
-    while (m_remainingTime > 0 && !m_stop) {
-        if (m_cv.wait_for(lock, targetDuration, [this]() {
-            return m_stop.load() || m_paused.load();
-        })) {
-            if (m_paused) {
-                auto currentTime = std::chrono::steady_clock::now();
-                auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(currentTime - startTime);
-                m_remainingTime = m_time - (elapsed.count() / 1000.0f);
+void Timer::Pause() { 
+    if (m_isRunning && !m_isPaused) {
+        m_pauseStartTime = m_clock.getElapsedTime() / 1e+6;
+        m_isPaused = true;
+        m_isRunning = false;
+     }
+}
 
-                m_cv.wait(lock, [this]() {
-                    return !m_paused.load() || m_stop.load();
-                });
+void Timer::Resume() { 
+    if (m_isPaused) {
+        m_elapsedTime += m_pauseStartTime;
+        m_clock.restart();
+        m_isPaused = false;
+        m_isRunning = true;
+    }
+}
 
-                if (!m_stop && !m_paused) {
-                    startTime = std::chrono::steady_clock::now();
-                    targetDuration = std::chrono::milliseconds(static_cast<int>(m_remainingTime * 1000));
-                }
-            }
+void Timer::Stop() { 
+    if (m_isRunning) {
+        if (!m_isPaused) {
+            m_elapsedTime += m_clock.getElapsedTime() / 1e+6;
+        }
+        else {
+            m_elapsedTime += m_pauseStartTime;
+        }
+        m_isRunning = false;
+        m_isPaused = false;
+    }
+}
 
-            if (m_stop) {
-                break;
-            }
-        } else {
-            m_remainingTime = 0;
-            break;
+void Timer::Restart() { 
+    m_clock.restart();
+    m_elapsedTime = 0.0f;
+    m_pauseStartTime = 0.0f;
+    m_isRunning = true;
+    m_isPaused = false;
+    m_isFinished = false;
+}
+
+void Timer::Update() { 
+    if (m_isRunning && !m_isPaused && !m_isFinished) {
+        if (elapsedTime() >= m_targetTime) {
+            m_isFinished = true;
+            m_isRunning = false;
         }
     }
-
-    if (m_remainingTime <= 0 && !m_stop) {
-        m_running = false;
-    }
-}
-
-Timer::Timer(float time) {
-	m_time = time;
-}
-
-Timer::~Timer() {
-    m_stop = true;
-    m_cv.notify_all();
-    if (m_thread.joinable()) {
-        m_thread.join();
-    }
-}
-
-void Timer::Start() {
-    if (m_running) {
-        return;
-    }
-
-    m_running = true;
-    m_stop = false;
-    m_paused = false;
-    m_remainingTime = m_time;
-
-    if (m_thread.joinable()) {
-        m_thread.join();
-    }
-
-    m_thread = std::thread([this]() {
-        runTimer();
-    });
-}
-
-void Timer::Stop() {
-    m_stop = true;
-    m_running = false;
-    m_paused = false;
-    m_cv.notify_all();
-}
-
-void Timer::Pause() {
-    if (!m_running || m_paused) {
-        return;
-    }
-
-    std::unique_lock<std::mutex> lock(m_mutex);
-    m_paused = true;
-    m_pauseTime = std::chrono::steady_clock::now();
-}
-
-void Timer::Resume() {
-    if (!m_running || !m_paused) {
-        return;
-    }
-
-    std::unique_lock<std::mutex> lock(m_mutex);
-
-    auto now = std::chrono::steady_clock::now();
-    auto pausedDuration = std::chrono::duration_cast<std::chrono::milliseconds>(now - m_pauseTime);
-
-    m_remainingTime -= pausedDuration.count() / 1000.0f;
-
-    m_paused = false;
-    m_cv.notify_all();
 }
 
 void Timer::setTime(float time) {
-    std::unique_lock<std::mutex> lock(m_mutex);
-    m_time = time;
-    if (m_running && !m_paused) {
-        m_remainingTime = time;
+    m_targetTime = time;
+    reset();
+}
+
+float Timer::remainingTime() const { 
+    if (m_isFinished) {
+        return 0.0f;
     }
+
+    float remaining = m_targetTime - elapsedTime();
+    return remaining > 0 ? remaining : 0.0f;
 }
 
-bool Timer::isRunning() const {
-    return m_running && !m_paused;
+float Timer::elapsedTime() const { 
+    if (!m_isRunning || m_isFinished) {
+        return m_elapsedTime;
+    }
+
+    if (m_isPaused) {
+        return m_elapsedTime;
+    }
+
+    return m_elapsedTime + m_clock.getElapsedTime() / 1e+6;
 }
 
-bool Timer::isPaused() const {
-    return m_paused;
-}
-
-float Timer::getRemainingTime() const {
-    std::unique_lock<std::mutex> lock(m_mutex);
-    return m_remainingTime;
+void Timer::reset() {
+    m_clock.restart();
+    m_elapsedTime = 0.0f;
+    m_pauseStartTime = 0.0f;
+    m_isRunning = false;
+    m_isPaused = false;
+    m_isFinished = false;
 }

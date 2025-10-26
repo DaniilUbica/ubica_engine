@@ -17,7 +17,8 @@ set(ENGINE_SOURCES
     Engine/UI/GameScreen/GameScreenBase.cpp
     Engine/Particles/ParticleSystem.cpp
     Engine/Base/Pickable.cpp 
-    Engine/Core/Timer.cpp 
+    Engine/Core/ThreadedTimer.cpp 
+    Engine/Core/Timer.cpp
     Engine/World.cpp
     Engine/GameStateMachine.cpp
 
@@ -37,7 +38,8 @@ set(ENGINE_SOURCES
     Engine/Physics/ObjectsAttractionManager.h
     Engine/Particles/ParticleSystem.h
     Engine/Base/Pickable.h 
-    Engine/Core/Timer.h 
+    Engine/Core/ThreadedTimer.h 
+    Engine/Core/Timer.h
     Engine/World.h
     Engine/Helpers.hpp
     Engine/Constants.h

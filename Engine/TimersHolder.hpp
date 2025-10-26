@@ -35,7 +35,7 @@ public:
 
     static void resumeAllTimers() {
         for (auto& timer : m_timers) {
-            if (auto sp = timer.lock(); sp && sp->isPaused()) {
+            if (auto sp = timer.lock(); sp && sp->paused()) {
                 sp->Resume();
             }
         }
@@ -45,6 +45,14 @@ public:
         for (auto& timer : m_timers) {
             if (auto sp = timer.lock()) {
                 sp->Stop();
+            }
+        }
+    }
+
+    static void Update() {
+        for (auto& timer : m_timers) {
+            if (auto sp = timer.lock()) {
+                sp->Update();
             }
         }
     }

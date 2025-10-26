@@ -3,20 +3,20 @@
 using namespace game_engine;
 using namespace ui;
 
-GameScreenManager::GameScreenManager() {
-    m_stateMachineConnections.push_back(GameStateMachine::instance()->fireGameOver.connect([this]() {
+GameScreenManager::GameScreenManager(std::shared_ptr<GameStateMachine> stateMachine) : m_stateMachine(stateMachine) {
+    m_stateMachineConnections.push_back(m_stateMachine->fireGameOver.connect([this]() {
         onGameOver();
     }));
-    m_stateMachineConnections.push_back(GameStateMachine::instance()->fireGameStarted.connect([this]() {
+    m_stateMachineConnections.push_back(m_stateMachine->fireGameStarted.connect([this]() {
         onGameStarted();
     }));
-    m_stateMachineConnections.push_back(GameStateMachine::instance()->fireGamePaused.connect([this]() {
+    m_stateMachineConnections.push_back(m_stateMachine->fireGamePaused.connect([this]() {
         onGamePaused();
     }));
-    m_stateMachineConnections.push_back(GameStateMachine::instance()->fireGameResumed.connect([this]() {
+    m_stateMachineConnections.push_back(m_stateMachine->fireGameResumed.connect([this]() {
         onGameResumed();
     }));
-    m_stateMachineConnections.push_back(GameStateMachine::instance()->fireShowMainMenu.connect([this]() {
+    m_stateMachineConnections.push_back(m_stateMachine->fireShowMainMenu.connect([this]() {
         onShowMainMenu();
     }));
 }

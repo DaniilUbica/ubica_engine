@@ -13,9 +13,9 @@ enum class GameState {
     GAME_OVER
 };
 
-class GameStateMachine : public game_engine::cpplib::singletone_from_this<GameStateMachine> {
-    friend class singletone_from_this<GameStateMachine>;
+class GameStateMachine {
 public:
+    GameStateMachine();
     ~GameStateMachine();
 
     void setState(GameState newState);
@@ -30,8 +30,6 @@ public:
     nod::signal<void()> fireShowMainMenu;
 
 private:
-    GameStateMachine();
-
     GameState m_currentState = GameState::MAIN_MENU;
     GameState m_prevState    = GameState::MAIN_MENU;
 };
