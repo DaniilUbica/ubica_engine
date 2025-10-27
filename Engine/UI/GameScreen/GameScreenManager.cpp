@@ -25,7 +25,7 @@ GameScreenManager::~GameScreenManager() {
     m_gameScreens.clear();
 }
 
-void GameScreenManager::addGameScreen(GameState state, game_screen_t screen) { 
+void GameScreenManager::addGameScreen(int state, game_screen_t screen) {
     m_gameScreens.insert(std::make_pair(state, std::move(screen)));
 }
 
@@ -37,17 +37,17 @@ void GameScreenManager::Update(float time) {
 
 void GameScreenManager::onGameOver() { 
     hideAllGameScreens();
-    m_gameScreens[GameState::GAME_OVER]->showGameScreen();
+    m_gameScreens[static_cast<int>(GameState::GAME_OVER)]->showGameScreen();
 }
 
 void GameScreenManager::onGameStarted() {
     hideAllGameScreens();
-    m_gameScreens[GameState::RUNNING]->showGameScreen();
+    m_gameScreens[static_cast<int>(GameState::RUNNING)]->showGameScreen();
 }
 
 void GameScreenManager::onGamePaused() {
     hideAllGameScreens();
-//    m_gameScreens[GameState::PAUSED]->showGameScreen(); // TODO: got no paused screen now
+//    m_gameScreens[static_cast<int>(GameState::PAUSED)]->showGameScreen(); // TODO: got no paused screen now
 }
 
 void GameScreenManager::onGameResumed() {
@@ -56,7 +56,7 @@ void GameScreenManager::onGameResumed() {
 
 void GameScreenManager::onShowMainMenu() { 
     hideAllGameScreens();
-    m_gameScreens[GameState::MAIN_MENU]->showGameScreen();
+    m_gameScreens[static_cast<int>(GameState::MAIN_MENU)]->showGameScreen();
 }
 
 void GameScreenManager::hideAllGameScreens() {

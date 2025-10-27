@@ -18,23 +18,23 @@ namespace {
 class GameScreenManager {
 public:
     GameScreenManager(std::shared_ptr<GameStateMachine> stateMachine);
-    ~GameScreenManager();
+    virtual ~GameScreenManager();
 
-    void addGameScreen(GameState state, game_screen_t screen);
-    void Update(float time);
+    virtual void addGameScreen(int state, game_screen_t screen);
+    virtual void Update(float time);
 
+private:
     void onGameOver();
     void onGameStarted();
     void onGamePaused();
     void onGameResumed();
     void onShowMainMenu();
 
-private:
-
+protected:
     void hideAllGameScreens();
 
     std::shared_ptr<GameStateMachine> m_stateMachine;
-    std::map<GameState, game_screen_t> m_gameScreens;
+    std::map<int, game_screen_t> m_gameScreens;
     std::list<nod::scoped_connection> m_stateMachineConnections;
 };
 

@@ -6,34 +6,36 @@ GameStateMachine::GameStateMachine() {}
 
 GameStateMachine::~GameStateMachine() {}
 
-void GameStateMachine::setState(GameState newState) {
+void GameStateMachine::setState(int newState) {
+    const auto gameState = static_cast<GameState>(newState);
+    const auto prevGameState = static_cast<GameState>(m_currentState);
     m_prevState = m_currentState;
     m_currentState = newState;
 
-    switch (m_currentState) {
+    switch (gameState) {
         case GameState::MAIN_MENU:
-            if (m_prevState != GameState::MAIN_MENU) {
+            if (prevGameState != GameState::MAIN_MENU) {
                 fireShowMainMenu();
             }
             break;
         case GameState::RUNNING:
-            if (m_prevState == GameState::MAIN_MENU) {
+            if (prevGameState == GameState::MAIN_MENU) {
                 fireGameStarted();
             }
-            else if (m_prevState == GameState::PAUSED) {
+            else if (prevGameState == GameState::PAUSED) {
                 fireGameResumed();
             }
-            else if (m_prevState == GameState::GAME_OVER) {
+            else if (prevGameState == GameState::GAME_OVER) {
                 fireGameRestarted();
             }
             break;
         case GameState::PAUSED:
-            if (m_prevState != GameState::PAUSED) {
+            if (prevGameState != GameState::PAUSED) {
                 fireGamePaused();
             }
             break;
         case GameState::GAME_OVER:
-            if (m_prevState != GameState::GAME_OVER) {
+            if (prevGameState != GameState::GAME_OVER) {
                 fireGameOver();
             }
             break;
